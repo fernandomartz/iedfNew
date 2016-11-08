@@ -1,0 +1,30 @@
+/*****DROPDOWN IE ONLY STYLESHEET*****/
+/*****BY: AMIT JAKHU*****/
+/*****WWW.AMITJAKHU.COM*****/
+
+/* all ie versions */
+
+#navigation li .sub-nav-wrapper {
+	display: none; /* IMPORTANT for ie to understand dropdown should not appear when hovering outside of the nav area */
+	padding-top: 15px; /* quick fix to position dropdown */
+}
+
+#navigation li:hover .sub-nav-wrapper {
+	display: block;
+	top: 0;
+}
+
+/* ie7 only */
+
+*+html #navigation li {
+	float: left; /* fix for display: inline-block */
+}
+
+*+html #navigation li .sub-nav-wrapper .sub-nav li {
+	float: none; /* don't want to have any floats within the dropdown */
+	margin-top: -3px; /* quick fix to hide spacing */
+}
+
+*+html #navigation li .sub-nav-wrapper {
+	padding-top: 30px;
+}
