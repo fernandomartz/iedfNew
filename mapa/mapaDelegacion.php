@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------------------------------------------------------
 
 //Conexion de Base de Datos.
-include("../conn/conn.php");
+include("conn/conn.php");
 //Tiempo de espera de respuesta de la base de datos ilimitado.
 set_time_limit(0);
 
@@ -60,9 +60,18 @@ $xdistrito = array();
 <html>
   <head>
     <title>SEPE :: Mapa Distrito Federal</title>
-    <link href="css/default.css" rel="stylesheet">
-	<link href="../css/style2.css" rel="stylesheet" type="text/css">
-	<link href="../css/font/font.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/default.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/style2.css"/>
+	<link rel="stylesheet" type="text/css"href="../css/font/font.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/metisMenu/metisMenu.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/metisMenu/style.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <script type="text/javascript" src="../css/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
+    <script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
@@ -236,10 +245,6 @@ if($lim==1) {
 	  		loadXMLDoc('<?php echo $xseccion[$i]; ?>','<?php echo $xdistrito[$i]; ?>','<?php echo $tipo; ?>','<?php echo $anio; ?>'); });
 <?php } ?>
 
-
-
-
-
 	//Incluir ventada de informacion
 	infoWindow = new google.maps.InfoWindow();
 	//Crear escucha y cerrar ventana de informacion cuando se de un click en el mapa.
@@ -253,9 +258,9 @@ if($lim==1) {
   </head>
   <body>
 	<h1 style="text-align:left;">
-	<a href="../eleccionesMapa.php"><img src="../images/logo.png" alt="Logo" width="50" height="50" style="vertical-align:middle; padding-right:10px;" title="Logo" /></a>
-	Sistema Estadistico de Procesos  Electorales (SEPE)
-  </h1>
+		<a href="../eleccionesMapa.php"><img src="../images/logo.png" alt="Logo" width="50" height="50" style="vertical-align:middle; padding-right:10px;" title="Logo" /></a>
+		Sistema Estadistico de Procesos  Electorales (SEPE)
+ 	</h1>
     <div style="padding-left::5px; background-color:#CCC; font-size:14px;;"><?php echo $titulo; ?></div>
      <div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;"></div>
 

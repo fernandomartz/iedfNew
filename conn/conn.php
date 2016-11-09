@@ -1,6 +1,6 @@
 <?php
-include('../../adodb/adodb.inc.php');
-include('ConnIedf.inc');
+include('adodb/adodb.inc.php');
+include('conn/ConnIedf.inc');
 $db = ADONewConnection('mysql'); # ej. 'mysql' o 'oci8'
 $db->debug = false; // true o false
 $conectado = $db->Connect($servidor, $usuario, $password, $bd);

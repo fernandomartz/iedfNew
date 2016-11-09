@@ -74,7 +74,7 @@
 			//alert(display);
 
 			//var url = 'http://nemesoftware.com/sepe2014/mapa/';
-			var url = 'http://localhost/sepe2014/mapa/';
+			var url = 'http://localhost/iedfNew/mapa/';
 			var activarUrl = false;
 
 			if(valueTipo==1) {
@@ -240,6 +240,7 @@
 	</div>
 	<div class="col-md-3">
 	</div>
+
 	<!-- script -->
 	<script type="text/javascript" src="css/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="css/bootstrap/js/bootstrap.min.js"></script>

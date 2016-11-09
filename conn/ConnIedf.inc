@@ -2,7 +2,7 @@
 //Configuración de Base de Datos
 $servidor="localhost";
 $usuario="root";
-$password="root";
+$password="123";
 $bd="iedf";
 /* SERVIDOR
 //$servidor="localhost";

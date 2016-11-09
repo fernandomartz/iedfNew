@@ -3,7 +3,7 @@
 <head>
 	<!--META-->
 	<meta charset="UTF-8" />
-	<title>S3E :: Partido de la Revolución Democratica</title>
+	<title>Sistema Estadistico de Procesos Electorales (SEPE)</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sistema de Estadistica de Elecciones Electorales del Distrito Federal" />
