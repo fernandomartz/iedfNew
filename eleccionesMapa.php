@@ -152,7 +152,8 @@
 	<!--END DEMO ONLY-->
 	<div class="col-md-1 text-center">
 		<br><br><br><br><br><br>
-        <a type="button" class="btn btn-default" href="index.php" role="button"><i class="glyphicon glyphicon-home"></i> Inicio</a><br>
+        <a type="button" class="btn btn-default" href="index.php" role="button"><i class="glyphicon glyphicon-home"></i> Inicio</a><br><br>
+        <a type="button" class="btn btn-primary" href="eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a><br>
 	</div>
 	<div class="col-md-3">
 	</div>

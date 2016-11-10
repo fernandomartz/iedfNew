@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------------------------------------------------------
 
 //Conexion de Base de Datos.
-include("../conn/conn.php");
+include("conn/conn.php");
 //Tiempo de espera de respuesta de la base de datos ilimitado.
 set_time_limit(0);
 

@@ -32,7 +32,7 @@
 		function ir() {
 			var optEleccion = document.getElementById('menueleccion').value;
 			//var url = 'http://nemesoftware.com/sepe2014/mapa/';
-			var url = 'http://localhost/sepe2014/mapa/';
+			var url = 'http://localhost/iedfNew/mapa/';
 			var activarUrl = false;
 			var valueTipo;
 			if(document.getElementById('radioTipo1').checked){
@@ -75,7 +75,8 @@
 	<!--END DEMO ONLY-->
 	<div class="col-md-1 text-center">
 		<br><br><br><br><br><br>
-        <a type="button" class="btn btn-default" href="index.php" role="button"><i class="glyphicon glyphicon-home"></i> Inicio</a><br>
+        <a type="button" class="btn btn-default" href="index.php" role="button"><i class="glyphicon glyphicon-home"></i> Inicio</a><br><br>
+        <a type="button" class="btn btn-primary" href="redistritacion.php" role="button"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a><br>
 	</div>
 	<div class="col-md-3">
 	</div>
