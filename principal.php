@@ -6,7 +6,7 @@ $imgPortada = (rand(1,4));
 <head>
     <!--META-->
     <meta charset="UTF-8" />
-	<title>Sistema Estadistico de Procesos Electorales (SEPE)</title>
+	<title>SEPE :: 2016</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sistema de Estadistica de Elecciones Electorales del Distrito Federal" />
@@ -104,7 +104,7 @@ $imgPortada = (rand(1,4));
     <div class="dzyngiri-bottom">
     	<strong>@McAllsoftware.com</strong>
         <span class="right">
-            2016
+            SEPE :: 2016
     		<!--<img src="http://www.logotypes101.com/logos/601/C1A9F6BBDCCB8D0048E0C827CF8E01F8/tn_IEDF_Mexico_Politica.png" alt="Logo" width="50" height="50" style="vertical-align:middle; padding-right:10px;"/>-->
     	</span>
    	    <div class="clr"></div>
