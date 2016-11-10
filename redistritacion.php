@@ -63,7 +63,7 @@
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="col-lg-2 col-sm-3 text-center navbar-header">
             <a class="navbar-brand" href="#">
-            	<img class="img-circle img-responsive img-center" src="http://www.logotypes101.com/logos/601/C1A9F6BBDCCB8D0048E0C827CF8E01F8/tn_IEDF_Mexico_Politica.png" alt="iedf">
+            	<img class="img-circle img-responsive img-center" src="https://www.immobilienscout24.de/anbieter/resources_new/application/profilepage/team/profilbild_bb_avatar_275_275.png" alt="iedf">
             </a>
         </div>
         <div class="col-lg-6 col-sm-1 navbar-header">
@@ -74,8 +74,8 @@
 
 	<!--END DEMO ONLY-->
 	<div class="col-md-1 text-center">
-		<br><br><br><br><br><br>
-        <a type="button" class="btn btn-default" href="index.php" role="button"><i class="glyphicon glyphicon-home"></i> Inicio</a><br><br>
+		<br><br><br><br><br><br><br><br><br><br>
+        <a type="button" class="btn btn-default" href="principal.php" role="button"><i class="glyphicon glyphicon-home"></i> Inicio</a><br><br>
         <a type="button" class="btn btn-primary" href="redistritacion.php" role="button"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a><br>
 	</div>
 	<div class="col-md-3">

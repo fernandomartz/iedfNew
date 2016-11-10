@@ -20,18 +20,20 @@ $imgPortada = (rand(1,4));
     <link rel="stylesheet" type="text/css" href="css/metisMenu/metisMenu.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/metisMenu/style.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
 </head>
 <body>
     <!--DEMO ONLY-->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="col-lg-2 col-sm-3 text-center navbar-header">
             <a class="navbar-brand" href="#">
-            <img class="img-circle img-responsive img-center" src="http://www.logotypes101.com/logos/601/C1A9F6BBDCCB8D0048E0C827CF8E01F8/tn_IEDF_Mexico_Politica.png" alt="iedf">
+            <img class="img-circle img-responsive img-center" src="https://www.immobilienscout24.de/anbieter/resources_new/application/profilepage/team/profilbild_bb_avatar_275_275.png" alt="iedf">
             <small><strong></strong></small></a><br>
         </div>
         <div class="col-lg-6 col-sm-1 navbar-header">
-            <br>
-            <h4><strong><i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+            <br><br><br><br>
+            <h4><strong class="wrapper wrapper-content animated fadeInRight"><i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
         </div>
     </nav>
     <h2 align="center"></h2>
@@ -40,7 +42,7 @@ $imgPortada = (rand(1,4));
     <!--NAVIGATION-->
     <ul id="navigation" class="nav navbar-top-links">
         <li class="dropdown">
-            <a href="index.php" class="main"><i class="glyphicon glyphicon-home"></i> Inicio</a>
+            <a href="principal.php" class="main"><i class="glyphicon glyphicon-home"></i> Inicio</a>
         </li>
         <li>
             <a href="#" class="main"><i class="glyphicon glyphicon-list-alt"></i> Elecciones</a>
@@ -53,18 +55,19 @@ $imgPortada = (rand(1,4));
             </div>
         </li>
         <li>
-          <a href="#" class="main"><i class="glyphicon glyphicon-inbox"></i> Servicios</a>
+            <a href="#" class="main"><i class="glyphicon glyphicon-inbox"></i> Servicios</a>
         </li>
         <li>
-          <a href="#" class="main"><i class="glyphicon glyphicon-cloud"></i> Programas</a>
+            <a href="#" class="main"><i class="glyphicon glyphicon-cloud"></i> Programas</a>
         </li>
-
         <li>
-          <a href="#" class="main"><i class="glyphicon glyphicon-comment"></i> Contactanos</a>
+            <a href="#" class="main"><i class="glyphicon glyphicon-comment"></i> Contactanos</a>
         </li>
-
         <li>
-          <a href="#" class="main"><i class="glyphicon glyphicon-bullhorn"></i> Ayuda</a>
+            <a href="#" class="main"><i class="glyphicon glyphicon-bullhorn"></i> Ayuda</a>
+        </li>
+        <li class="text-danger">
+            <a href="login.html" class="main"><i class="glyphicon glyphicon-off"></i> Cerrar Sesion</a>
         </li>
     </ul>
     <!--END NAVIGATION-->
@@ -101,7 +104,8 @@ $imgPortada = (rand(1,4));
     <div class="dzyngiri-bottom">
     	<strong>@McAllsoftware.com</strong>
         <span class="right">
-    		<img src="http://www.logotypes101.com/logos/601/C1A9F6BBDCCB8D0048E0C827CF8E01F8/tn_IEDF_Mexico_Politica.png" alt="Logo" width="50" height="50" style="vertical-align:middle; padding-right:10px;" title="Logo" />
+            2016
+    		<!--<img src="http://www.logotypes101.com/logos/601/C1A9F6BBDCCB8D0048E0C827CF8E01F8/tn_IEDF_Mexico_Politica.png" alt="Logo" width="50" height="50" style="vertical-align:middle; padding-right:10px;"/>-->
     	</span>
    	    <div class="clr"></div>
     </div>
