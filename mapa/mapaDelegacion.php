@@ -256,27 +256,28 @@ $xdistrito = array();
 	    </script>
   	</head>
  	<body>
-		<!--DEMO ONLY-->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 	        <div class="col-lg-2 col-sm-3 text-center navbar-header">
 	            <a class="navbar-brand" href="#"></a>
 	        </div>
 	        <div class="col-lg-6 col-sm-1 navbar-header">
 	            <br>
-	            <h4><strong><a type="button" class="btn btn-primary" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+	            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
 	        </div>
 	    </nav>
-		<!--END DEMO ONLY-->
-			<br>
-		<div class="col-md-6 text-center">
+	   <!-- Carga de datos -->
+	    <div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
 			<div style="padding-left::5px; background-color:#FFF; font-size:14px;">
 				<strong><?php echo $titulo; ?></strong>
 			</div>	
 		</div>		
      		<br>
-     	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;"></div>
+     	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+     		<!-- Carga del mapa -->
+     	</div>
     		<br><br>
-    	<div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
+    	<!-- Recuadro de informacion -->
+     	<div class="wrapper wrapper-content animated fadeInRight" style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
 			<br><br>
 			<?php
 				if($diff==1) { 
@@ -287,7 +288,7 @@ $xdistrito = array();
 			?>
 			<br><br>
     	 </div>
-     	<div id="datos" style="position: absolute; 
+     	<div class="wrapper wrapper-content animated fadeInRight" id="datos" style="position: absolute; 
      		<?php 
      			if($tipo == 2 && $anio==2003) {
      				echo 'top: 570px;';

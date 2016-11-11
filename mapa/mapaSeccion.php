@@ -56,156 +56,187 @@ $xdistrito = array();
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+ 	<head>
     <title>SEPE :: Mapa Distrito Federal</title>
+    <!--STYLESHEETS-->
     <link href="css/default.css" rel="stylesheet">
 	<link href="../css/style2.css" rel="stylesheet" type="text/css">
 	<link href="../css/font/font.css" rel="stylesheet" type="text/css">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<link rel="stylesheet" type="text/css" href="../css/metisMenu/metisMenu.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/metisMenu/style.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <!-- Script -->
+    <script type="text/javascript" src="../css/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
+    <script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;
 		var infoWindow;
 		var datos = <?php echo $datos; ?>;
 		function initialize() {
-//-----------------------------------------------------------------------------------------------
-<?php
-	//Consulta: Buscar todas las secciones a desplegar en el mapa por DELEGACION
-	$sql9= "SELECT seccion FROM ".$Tabla." WHERE seccion = '".$seccion."' GROUP BY seccion";
-	$rs9 = $db->execute($sql9);
-	while(!$rs9->EOF)
-	{
-		$seccion = $rs9->fields[0];
-		//Consulta: Buscar las coordenadas de la seccion para formar el poligo.
-		$sql1= "SELECT * FROM coordenadas2012seccion WHERE seccion in ('".$seccion."') ORDER BY orden";
-		$rs = $db->execute($sql1);
-		$ndistrito=$rs->fields[1];
-		//Consulta: Buscar informacion para representar el tematico {Ej: primer lugar, Segundo Lugar, etc.}
-		$sql3= "SELECT partido, difp FROM ".$Tabla2." WHERE seccion in ('".$seccion."') AND lugar =". $lugar;
-		$rs3 = $db->execute($sql3);
-		$partido = $rs3->fields[0];
-		$difp = $rs3->fields[1];
+			//-----------------------------------------------------------------------------------------------
+			<?php
+				//Consulta: Buscar todas las secciones a desplegar en el mapa por DELEGACION
+				$sql9= "SELECT seccion FROM ".$Tabla." WHERE seccion = '".$seccion."' GROUP BY seccion";
+				$rs9 = $db->execute($sql9);
+				while(!$rs9->EOF)
+				{
+					$seccion = $rs9->fields[0];
+					//Consulta: Buscar las coordenadas de la seccion para formar el poligo.
+					$sql1= "SELECT * FROM coordenadas2012seccion WHERE seccion in ('".$seccion."') ORDER BY orden";
+					$rs = $db->execute($sql1);
+					$ndistrito=$rs->fields[1];
+					//Consulta: Buscar informacion para representar el tematico {Ej: primer lugar, Segundo Lugar, etc.}
+					$sql3= "SELECT partido, difp FROM ".$Tabla2." WHERE seccion in ('".$seccion."') AND lugar =". $lugar;
+					$rs3 = $db->execute($sql3);
+					$partido = $rs3->fields[0];
+					$difp = $rs3->fields[1];
 
-		//Determinar el color {Individual o Diferencias}
-		$color='#000';
-		if($diff==1)
-		{
-			//Diferencias
-			include("inc/selectcolor".$anio."Dif.php");
-		} else {
-			//Indivitual
-			include("inc/selectcolor".$anio."Ind.php");
-		}
+					//Determinar el color {Individual o Diferencias}
+					$color='#000';
+					if($diff==1)
+					{
+						//Diferencias
+						include("inc/selectcolor".$anio."Dif.php");
+					} else {
+						//Indivitual
+						include("inc/selectcolor".$anio."Ind.php");
+					}
 
-		//Optiene datos de la seccion
-		$sql2= "SELECT distrito, seccion, COUNT(seccion) as num FROM coordenadas2012seccion WHERE seccion in (".$seccion.") GROUP BY seccion";
-		$rs2 = $db->execute($sql2);
-		$numPuntos = 1;
-		$ultimo = $rs2->fields[2]-1;  //Candidad de puntos por poligono
+					//Optiene datos de la seccion
+					$sql2= "SELECT distrito, seccion, COUNT(seccion) as num FROM coordenadas2012seccion WHERE seccion in (".$seccion.") GROUP BY seccion";
+					$rs2 = $db->execute($sql2);
+					$numPuntos = 1;
+					$ultimo = $rs2->fields[2]-1;  //Candidad de puntos por poligono
 
-?>
-		//COORDENADAS
-		var Coords0<?php echo $numPoly; ?> = [
-<?php
-			while(!$rs->EOF)
-			{
-				$cadena= "new google.maps.LatLng(".$rs->fields[4].")";
-				if($ultimo < $numPuntos) { $cadena.="\n"; } else { $cadena.=",\n"; }
-				//echo "//".$numPoly." - ".$ultimo."\n";
-				echo $cadena;
-				$numPuntos++;
-				$fill = $color;
-				$rs->MoveNext();
-			} //while
-?>
-		]; //Coordsx
-		//Crea la variable del numero del poligo
-		var Pol0<?php echo $numPoly; ?>;
-  		//Crea el poligo y las propiedades
-		Pol0<?php echo $numPoly; ?> = new google.maps.Polygon({ paths: Coords0<?php echo $numPoly; ?>, strokeColor: '#666', strokeOpacity: 0.8, strokeWeight: 2, fillColor: '<?php echo $fill; ?>', fillOpacity: '<?php echo $fillop; ?>' });
+			?>
+					//COORDENADAS
+					var Coords0<?php echo $numPoly; ?> = [
+			<?php
+						while(!$rs->EOF)
+						{
+							$cadena= "new google.maps.LatLng(".$rs->fields[4].")";
+							if($ultimo < $numPuntos) { $cadena.="\n"; } else { $cadena.=",\n"; }
+							//echo "//".$numPoly." - ".$ultimo."\n";
+							echo $cadena;
+							$numPuntos++;
+							$fill = $color;
+							$rs->MoveNext();
+						} //while
+			?>
+					]; //Coordsx
+					//Crea la variable del numero del poligo
+					var Pol0<?php echo $numPoly; ?>;
+			  		//Crea el poligo y las propiedades
+					Pol0<?php echo $numPoly; ?> = new google.maps.Polygon({ paths: Coords0<?php echo $numPoly; ?>, strokeColor: '#666', strokeOpacity: 0.8, strokeWeight: 2, fillColor: '<?php echo $fill; ?>', fillOpacity: '<?php echo $fillop; ?>' });
 
-<?php
-		// ************************************************************************************
-		//Arreglo de secciones relacionadas con el numero del poligono
-		$xseccion[$numPoly] = $seccion;
-		$xdistrito[$numPoly] = $ndistrito;
-		$numPoly++;
-		$rs9->MoveNext();
-	} //while
-?>
+			<?php
+					// ************************************************************************************
+					//Arreglo de secciones relacionadas con el numero del poligono
+					$xseccion[$numPoly] = $seccion;
+					$xdistrito[$numPoly] = $ndistrito;
+					$numPoly++;
+					$rs9->MoveNext();
+				} //while
+			?>
 
-//-----------------------------------------------------------------------------------------------
+			//-----------------------------------------------------------------------------------------------
 
-	//CENTROIDE DE LA PRIMERA COORDENADA
-	var bounds = new google.maps.LatLngBounds();
-	var i;
-	for (i = 0; i < Coords01.length; i++) {
-  		bounds.extend(Coords01[i]);
-	}
-  	var myLatLng = bounds.getCenter();
+				//CENTROIDE DE LA PRIMERA COORDENADA
+				var bounds = new google.maps.LatLngBounds();
+				var i;
+				for (i = 0; i < Coords01.length; i++) {
+			  		bounds.extend(Coords01[i]);
+				}
+			  	var myLatLng = bounds.getCenter();
 
-	//OPCIONES DE MAPA
-  	var mapOptions = {
-    	zoom: 17,
-    	center: myLatLng,
-		panControl: false,
-		streetViewControl: false,
-		mapTypeControl: true,
-    	mapTypeControlOptions: {
-      		style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-    	},
-		zoomControl: true,
-    	zoomControlOptions: {
-      		style: google.maps.ZoomControlStyle.SMALL
-    	},
-    	mapTypeId: google.maps.MapTypeId.ROADMAP
-  	};
+				//OPCIONES DE MAPA
+			  	var mapOptions = {
+			    	zoom: 17,
+			    	center: myLatLng,
+					panControl: false,
+					streetViewControl: false,
+					mapTypeControl: true,
+			    	mapTypeControlOptions: {
+			      		style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+			    	},
+					zoomControl: true,
+			    	zoomControlOptions: {
+			      		style: google.maps.ZoomControlStyle.SMALL
+			    	},
+			    	mapTypeId: google.maps.MapTypeId.ROADMAP
+			  	};
 
-	//Asignar mapa al DIV
-  	map = new google.maps.Map(document.getElementById('map-canvas2'),
-      	mapOptions);
-//-----------------------------------------------------------------------------------------------
-<?php
-	//Asignar las secciones al mapa, crear el escucha del poligono y la funcion a realizar.
-	for($i=1; $i < $numPoly; $i++)
-	{
-?>
-		Pol0<?php echo $i; ?>.setMap(map);
-		google.maps.event.addListener(Pol0<?php echo $i; ?>, 'click', function(){
-	  		loadXMLDoc('<?php echo $xseccion[$i]; ?>','<?php echo $xdistrito[$i]; ?>','<?php echo $tipo; ?>','<?php echo $anio; ?>'); });
-<?php } ?>
+				//Asignar mapa al DIV
+			  	map = new google.maps.Map(document.getElementById('map-canvas2'),
+			      	mapOptions);
+			//-----------------------------------------------------------------------------------------------
+			<?php
+				//Asignar las secciones al mapa, crear el escucha del poligono y la funcion a realizar.
+				for($i=1; $i < $numPoly; $i++)
+				{
+			?>
+					Pol0<?php echo $i; ?>.setMap(map);
+					google.maps.event.addListener(Pol0<?php echo $i; ?>, 'click', function(){
+				  		loadXMLDoc('<?php echo $xseccion[$i]; ?>','<?php echo $xdistrito[$i]; ?>','<?php echo $tipo; ?>','<?php echo $anio; ?>'); });
+			<?php } ?>
 
-	//Incluir ventada de informacion
-	infoWindow = new google.maps.InfoWindow();
-	//Crear escucha y cerrar ventana de informacion cuando se de un click en el mapa.
-	google.maps.event.addListener(map, 'click', function() { infoWindow.close(); });
-} //function
+				//Incluir ventada de informacion
+				infoWindow = new google.maps.InfoWindow();
+				//Crear escucha y cerrar ventana de informacion cuando se de un click en el mapa.
+				google.maps.event.addListener(map, 'click', function() { infoWindow.close(); });
+			} //function
 
-	//Cargar mapa cuando inicie la pagina.
-	google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
+				//Cargar mapa cuando inicie la pagina.
+				google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
   </head>
   <body>
-	<h1 style="text-align:left;"> <a href="http://localhost/sepe2014/eleccionesMapa.php"><img src="../images/logo.png" alt="Logo" width="50" height="50" style="vertical-align:middle; padding-right:10px;" title="Logo" /></a>
-	Sistema Estadistico de Procesos  Electorales (SEPE)
-</h1>
-    <div style="padding-left::5px; background-color:#CCC; font-size:14px;;"><?php echo $titulo; ?></div>
-
-
-     <div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;"></div>
-
-<div style="width:800px;"><a href="../eleccionesMapa.php"><img src="../images/ico/back.png" width="30px" height="30px" /></a></div>
-
-<!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-<div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
-			<?php
-			if($diff==1) { include('inc/colores'.$anio.'Dif.php'); }
-			else { include('inc/colores'.$anio.'Ind.php'); }
-			?>
-     </div>
-     <div id="datos" style="position: absolute; width: 300px; height: 200px;  <?php if($tipo == 2 && $anio==2003) {echo 'top: 570px;';}else{echo 'top: 370px;';} ?>  left: 820px; border=1;"></div> <!-- 2012:300 / 2009:370 -->
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="col-lg-2 col-sm-3 text-center navbar-header">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <div class="col-lg-6 col-sm-1 navbar-header">
+            <br>
+            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../redistritacion.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Redistritación</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+        </div>
+    </nav>
+    <!-- Carga de datos -->
+    <div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
+		<div style="padding-left::5px; background-color:#FFF; font-size:14px;">
+			<strong><?php echo $titulo; ?></strong>
+		</div>	
+	</div>		
+ 		<br>
+ 	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+ 		<!-- Carga del mapa -->
+ 	</div>
+		<br><br>
+	<!-- Recuadro de informacion -->
+ 	<div class="wrapper wrapper-content animated fadeInRight" style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
+		<br><br>
+		<?php
+			if($diff==1) { 
+				include('inc/colores'.$anio.'Dif.php'); 
+			} else { 
+				include('inc/colores'.$anio.'Ind.php'); 
+			}
+		?>
+		<br><br>
+	 </div>
+ 	<div class="wrapper wrapper-content animated fadeInRight" id="datos" style="position: absolute; 
+ 		<?php 
+ 			if($tipo == 2 && $anio==2003) {
+ 				echo 'top: 570px;';
+ 			}else{
+ 				echo 'top: 370px;';
+ 			} 
+ 		?> 
+ 		width: 300px; height: 200px; left: 820px; border=1;">
+ 	</div><!-- 2012:300 / 2009:370 -->
   </body>
 </html>

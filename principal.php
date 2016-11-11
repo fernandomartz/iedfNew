@@ -70,7 +70,7 @@ $imgPortada = (rand(1,4));
             <a href="#" class="main"><i class="glyphicon glyphicon-bullhorn"></i> Ayuda</a>
         </li>
         <li class="text-danger">
-            <a href="sesion/logout.php" class="main"><i class="glyphicon glyphicon-off"></i> Cerrar Sesion</a>
+            <a href="index.html" class="main"><i class="glyphicon glyphicon-off"></i> Cerrar Sesion</a>
         </li>
     </ul>
     <!--END NAVIGATION-->
