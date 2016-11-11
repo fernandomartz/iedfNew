@@ -269,12 +269,15 @@ $xdistrito = array();
 	    </nav>
 		<!--END DEMO ONLY-->
 	    <div style="padding-left::5px; background-color:#CCC; font-size:14px;;"><?php echo $titulo; ?></div>
+	    	<br><br>
 	    <div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;"></div>
 	    	<br><br>
 	    <div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
 				<?php
-				if($diff==1) { include('inc/colores'.$anio.'Dif.php'); }
-				else { include('inc/colores'.$anio.'Ind.php'); }
+				if($diff==1) { 
+					include('inc/colores'.$anio.'Dif.php'); }
+				else { 
+					include('inc/colores'.$anio.'Ind.php'); }
 				?>
 	    </div>
 	    <div id="datos" style="position: absolute; width: 300px; height: 200px; <?php if($tipo == 2 && $anio==2003) {echo 'top: 570px;';}else{echo 'top: 370px;';} ?> left: 820px; border=1;"></div>

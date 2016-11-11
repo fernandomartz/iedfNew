@@ -263,19 +263,39 @@ $xdistrito = array();
 	        </div>
 	        <div class="col-lg-6 col-sm-1 navbar-header">
 	            <br>
-	            <h4><strong><a type="button" class="btn btn-default" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+	            <h4><strong><a type="button" class="btn btn-primary" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
 	        </div>
 	    </nav>
 		<!--END DEMO ONLY-->
-    	<div style="padding-left::5px; background-color:#CCC; font-size:14px;;"><?php echo $titulo; ?></div>
+			<br>
+			<div class="col-md-6 text-center">
+    			<div style="padding-left::5px; background-color:#FFF; font-size:14px;">
+    				<strong><?php echo $titulo; ?></strong>
+    			</div>	
+			</div>		
+     		<br>
      	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;"></div>
-     		<br><br>
+    		<br><br>
     	<div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
+			<br><br>
 			<?php
-			if($diff==1) { include('inc/colores'.$anio.'Dif.php'); }
-			else { include('inc/colores'.$anio.'Ind.php'); }
+				if($diff==1) { 
+					include('inc/colores'.$anio.'Dif.php'); 
+				} else { 
+					include('inc/colores'.$anio.'Ind.php'); 
+				}
 			?>
+			<br><br>
     	 </div>
-     	<div id="datos" style="position: absolute; <?php if($tipo == 2 && $anio==2003) {echo 'top: 570px;';}else{echo 'top: 370px;';} ?> width: 300px; height: 200px; left: 820px; border=1;"></div>
+     	<div id="datos" style="position: absolute; 
+     		<?php 
+     			if($tipo == 2 && $anio==2003) {
+     				echo 'top: 570px;';
+     			}else{
+     				echo 'top: 370px;';
+     			} 
+     		?> 
+     		width: 300px; height: 200px; left: 820px; border=1;">
+     	</div>
   	</body>
 </html>
