@@ -72,7 +72,9 @@ $xdistrito = array();
 	    <script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
 	    <script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
 	    <script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
-	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&callback=initMap" async defer></script>-->
+    	<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 	    <script language="javascript" src="js/ajax.js"></script>
 	    <script>
 			var map;
@@ -251,8 +253,8 @@ $xdistrito = array();
 					google.maps.event.addListener(map, 'click', function() { infoWindow.close(); });
 				} //function
 
-					//Cargar mapa cuando inicie la pagina.
-					google.maps.event.addDomListener(window, 'load', initialize);
+				//Cargar mapa cuando inicie la pagina.
+				google.maps.event.addDomListener(window, 'load', initialize);
 	    </script>
   	</head>
  	<body>
@@ -275,6 +277,7 @@ $xdistrito = array();
      	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
      		<!-- Carga del mapa -->
      	</div>
+     	<iframe width="100%" height="520" frameborder="0" src="https://yoryyosyyoel.carto.com/viz/edd799a0-a6a8-11e6-ad60-0ee66e2c9693/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
     		<br><br>
     	<!-- Recuadro de informacion -->
      	<div class="wrapper wrapper-content animated fadeInRight" style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
