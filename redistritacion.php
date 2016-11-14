@@ -2,21 +2,21 @@
 <html>
 <head>
 	<!--META-->
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8"/>
 	<title>Redistritación :: 2016</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sistema de Estadistica de Elecciones Electorales del Distrito Federal" />
-    <meta name="keywords" content="Elecciones Electorales, Elecciones DF, Elecciones Distrito Federal" />
-    <meta name="author" content="Namen Neme Macal" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Sistema de Estadistica de Elecciones Electorales del Distrito Federal"/>
+    <meta name="keywords" content="Elecciones Electorales, Elecciones DF, Elecciones Distrito Federal"/>
+    <meta name="author" content="Namen Neme Macal"/>
 
 	<!--STYLESHEETS-->
-	<link href="css/style2.css" rel="stylesheet" type="text/css">
-	<link href="css/font/font.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font/font.css"/>
 	<link rel="stylesheet" type="text/css" href="css/metisMenu/metisMenu.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/metisMenu/style.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
 
 	<script language="javascript" type="application/javascript">
 		/*function changeText(opt){
@@ -31,8 +31,9 @@
 
 		function ir() {
 			var optEleccion = document.getElementById('menueleccion').value;
-			//var url = 'http://nemesoftware.com/sepe2014/mapa/';
+			//var url = 'http://nemesoftware.com/sepe/mapa/';
 			var url = 'http://localhost/iedfNew/mapa/';
+			//var url = 'localhost/mapa/';
 			var activarUrl = false;
 			var valueTipo;
 			if(document.getElementById('radioTipo1').checked){
@@ -43,17 +44,18 @@
 				var archivo = 'mapaSeccion2013.php';
 				activarUrl=true;
 			}
-
+				
 			var datos = '?redist='+optEleccion;
 
 			if(activarUrl)
 		  	   location.href=url+archivo+datos;
-			else
+			else 
 			   alert("Faltan datos por seleccionar");
+
 		}
 
 		function inicio() {
-			location.href="index.php";
+			location.href="principal.php";
 		}
 	</script>
 </head>
@@ -115,35 +117,3 @@
 	</div>
 </body>
 </html>
-<!--<center>
-		<div style="background-color:#FFF; width:800px; margin-top:10px; text-align: left; border:solid; border-color:#000;">
-			<div style="text-align:left; font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding-top:5px; padding-bottom:5px;"> &nbsp;&nbsp;
-				<a href="index.php">Inicio</a>
-			</div>
-			<div><h3>Eleccion:</h3></div>
-			<div style="position:relative; text-align:center;">
-				<br/>
-				<select name="menueleccion" id="menueleccion">
-					<option value="1">2015</option>
-					<option value="0">2012</option>
-				</select>
-				<br/>
-			</div>
-			<br/>
-
-			<div><h3>Presentacion de Datos:</h3></div>
-			<div style="position:relative;text-align:center;">
-				<br/>
-				    <input type="radio" name="radioTipo" id="radioTipo1" value="1"> Distrito &nbsp;&nbsp;
-				    <input type="radio" name="radioTipo" id="radioTipo2" value="2"> Seccion
-				<br/>
-			</div>
-			<br/>
-
-			<center>
-				<input name="ir" type="button" class="css3button" id="ir" onClick="javascript:ir();" value="Buscar">
-				<input name="regresar" type="button" class="css3button" id="regresar" onClick="javascript:inicio();" value="Inicio">
-			</center>
-			<br/><br/>
-		</div> 
-</center>-->

@@ -88,7 +88,7 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 	<script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
 	<script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&callback=initMap"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;
@@ -143,8 +143,8 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 		$ini_distrito=$drs->fields[2];
 		$xdistrito[$dnumPoly]=$ini_distrito;
 		$dnumPuntos = 1;
-		?>//COORDENADAS
-			var dCoords0<?php echo $dnumPoly; ?> = [
+		?>//COORDENADAS // comentado por Joel
+			/*var dCoords0<?php echo $dnumPoly; ?> = [
 		<?php
 			while(!$drs->EOF)
 			{
@@ -156,7 +156,7 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 					$dnumPuntos++;
 				}else{
 		?>
-				];
+				];*/ // fin del comentario Joel
 				var dPol0<?php echo $dnumPoly; ?>;
 		  		dPol0<?php echo $dnumPoly; ?> = new google.maps.Polyline({ path: dCoords0<?php echo $dnumPoly; ?>, strokeColor: '#000', strokeWeight: 1, zIndex:2 });
 		<?php /****reinicilizo porque cambia el distrito************/
@@ -352,7 +352,7 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 			for($di=1; $di < $dnumPoly; $di++)
 			{
 		?>
-			  dPol0<?php echo $di; ?>.setMap(map);
+			  /*dPol0<?php echo $di; ?>.setMap(map);*/ // Comentado por Joel
 		<?php
 			}
 		} //if limites distritales
@@ -366,7 +366,7 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 				sPol0<?php echo $i; ?>.setMap(map);
 				google.maps.event.addListener(sPol0<?php echo $i; ?>, 'click', function(){
 			  		loadXMLDoc4('<?php echo $xseccion[$i]; ?>','<?php echo $xdistrito[$i]; ?>','<?php echo $tipo; ?>','<?php echo "2013"; ?>'); });
-		<?php } ?>
+		<?php }  ?>
 
 			//Incluir ventada de informacion
 			infoWindow = new google.maps.InfoWindow();
@@ -386,19 +386,22 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 	    <div class="col-lg-6 col-sm-1 navbar-header">
 	        <br>
 	        <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../redistritacion.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Redistritación</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+	   		<br>
 	    </div>
 	</nav>
    <!-- Carga de datos -->
 	<div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
-		<div style="padding-left::5px; background-color:#FFF; font-size:14px;">
+		<div style="padding-left::5px; font-size:14px;">
+			<br>
 			<strong><?php echo $titulo; ?></strong>
+			<br><br>
 		</div>	
 	</div>		
 			<br>
-		<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
-		<!-- Carga del mapa -->
-		</div>
-		<br><br>
+	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+	<!-- Carga del mapa -->
+	</div>
+	<br><br>
 	<!--<div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
 			<?php
 			/*if($diff==1) { include('inc/colores'.$anio.'Dif.php'); }

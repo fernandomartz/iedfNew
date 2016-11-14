@@ -24,7 +24,8 @@
 			if(opt==1) { text="<div style='background-color:#CCC; padding-left:20px;'><br/>Entidad: DF  <input name='limite' id='limite' type='checkbox' value='1' /> Limites Distritales.<br/><br/></div>"; }
 			else if(opt==2) {text="<div style='background-color:#CCC; padding-left:20px;'><br/>Delegacion: <select name='delegacion' id='delegacion'>	<option value='0' selected='selected'>Seleccione</option>	<option value='2'>AZCAPOTZALCO</option>	<option value='3'>COYOACAN</option>    <option value='4'>CUAJIMALPA DE MORELOS</option>    <option value='5'>GUSTAVO A. MADERO</option>    <option value='6'>IZTACALCO</option>    <option value='7'>IZTAPALAPA</option>    <option value='8'>LA MAGDALENA CONTRERAS</option>    <option value='9'>MILPA ALTA</option>    <option value='10'>ALVARO OBREGON</option>    <option value='11'>TLAHUAC</option>    <option value='12'>TLALPAN</option>    <option value='13'>XOCHIMILCO</option>    <option value='14'>BENITO JUAREZ</option>    <option value='15'>CUAUHTEMOC</option>    <option value='16'>MIGUEL HIDALGO</option>    <option value='17'>VENUSTIANO CARRANZA</option></select> <input name='limite' id='limite' type='checkbox' value='1' /> Limites Distritales.<br/><br/></div>		";}
 			else if(opt==3) {text="<div style='background-color:#CCC; padding-left:20px;'><br/>Delegacion: <select name='distrito' id='distrito'>	<option value='0' selected='selected'>Seleccione</option>	<option value='I'>I</option>    <option value='II'>II</option>	<option value='III'>III</option>    <option value='IV'>IV</option>    <option value='V'>V</option>    <option value='VI'>VI</option>    <option value='VII'>VII</option>    <option value='VIII'>VIII</option>    <option value='IX'>IX</option>    <option value='X'>X</option>    <option value='XI'>XI</option>    <option value='XII'>XII</option>    <option value='XIII'>XIII</option>    <option value='XIV'>XIV</option>    <option value='XV'>XV</option>    <option value='XVI'>XVI</option>    <option value='XVII'>XVII</option>    <option value='XVIII'>XVIII</option>    <option value='XIX'>XIX</option>    <option value='XX'>XX</option>    <option value='XXI'>XXI</option>    <option value='XXII'>XXII</option>    <option value='XXIII'>XXIII</option>    <option value='XXIV'>XXIV</option>    <option value='XXV'>XXV</option>    <option value='XXVI'>XXVI</option>    <option value='XXVII'>XXVII</option>    <option value='XXVIII'>XXVIII</option>    <option value='XXIX'>XXIX</option>    <option value='XXX'>XXX</option>    <option value='XXXI'>XXXI</option>    <option value='XXXII'>XXXII</option>    <option value='XXXIII'>XXXIII</option>    <option value='XXXIV'>XXXIV</option>    <option value='XXXV'>XXXV</option>    <option value='XXXVI'>XXXVI</option>    <option value='XXXVII'>XXXVII</option>    <option value='XXXVIII'>XXXVIII</option>    <option value='XXXIX'>XXXIX</option>    <option value='XL'>XL</option></select> <input name='limite' id='limite' type='checkbox' value='1' /> Limites Distritales.<br/><br/></div>	";}
-			else if(opt==4) {text="<div style='background-color:#CCC; padding-left:20px;'><br/>Seccion: <input name='seccion' id='seccion' type='text' size='8' maxlength='5' /> <input name='limite' id='limite' type='checkbox' value='1' /> Limites Distritales.<br/><br/></div>";}
+			else if(opt==4) {text="	<div style='background-color:#CCC; padding-left:20px;'><br/>Seccion: <input name='seccion' id='seccion' type='text' size='8' maxlength='5' /> <input name='limite' id='limite' type='checkbox' value='1' /> Limites Distritales.<br/><br/></div>";}
+
 			document.getElementById('formulario').innerHTML = text;
 		}
 
@@ -47,8 +48,11 @@
 			optTransp = buscarSelect('transp');
 			var lim = document.getElementById('limite').checked;
 			if (lim) { valuelim=1; }
+				
 			//display = valueEleccion+" "+valueDatos+" "+valueTipo+" "+optEleccion+" "+optTransp+" "+optMapa+' '+diff;
-			//alert(valueTipo);
+
+		//alert(valueTipo);
+
 			if(valueTipo==2)
 			{
 				var valueDel;
@@ -73,8 +77,9 @@
 
 			//alert(display);
 
-			//var url = 'http://nemesoftware.com/sepe2014/mapa/';
+			//var url = 'http://nemesoftware.com/sepe/mapa/';
 			var url = 'http://localhost/iedfNew/mapa/';
+			//var url = 'localhost/mapa/';
 			var activarUrl = false;
 
 			if(valueTipo==1) {
@@ -101,15 +106,19 @@
 				activarUrl=true;
 			}
 
-			if(optEleccion==2009 && valueEleccion==1)
-				{
-					alert("No existe ese Tipo de Eleccion");
-				} else {
-					if(activarUrl) {
-						//alert(url+archivo+datos);
-						location.href=url+archivo+datos;
-					} else { alert("Faltan datos por seleccionar"); }
+		if(optEleccion==2009 && valueEleccion==1)
+			{
+				alert("No existe ese Tipo de Eleccion");
+			}
+		else
+			{
+				if(activarUrl) {
+					//alert(url+archivo+datos);
+					location.href=url+archivo+datos;
 				}
+				else { alert("Faltan datos por seleccionar"); }
+			}
+
 		}
 
 		function buscarRadio(elemento,maxnum) {
@@ -131,8 +140,10 @@
 			value = e.options[e.selectedIndex].value;
 			return(value);
 		}
+
+
 		function inicio() {
-			location.href="index.php";
+			location.href="principal.php";
 		}
 	</script>
 </head>
@@ -251,88 +262,3 @@
     <script type="text/javascript" src="css/metisMenu/style.min.js"></script>
 </body>
 </html>
-<!--<center>
-			<div style="background-color:#FFF; width:800px; margin-top:10px; text-align: left; border:solid; border-color:#000;">
-				
-				<div><h3>Eleccion:</h3></div>
-				<div style="position:relative; text-align:center;">
-					<br/>
-					<select name="menueleccion" id="menueleccion">
-						<option value="2015">2015</option>
-						<option value="2012">2012</option>
-					    <option value="2009">2009</option>
-					    <option value="2006">2006</option>
-					    <option value="2003">2003</option>
-					    <option value="2000">2000</option>
-					</select>
-					<br/>
-				</div>
-				<br/>
-
-				<div><h3>Tipo de Eleccion:</h3></div>
-				<div style="position:relative; text-align:center;">
-					<br/>
-					<input type="radio" name="radioEleccion" id="radioEleccion1" value="1">Jefe de Gobierno &nbsp;&nbsp;
-				    <input type="radio" name="radioEleccion" id="radioEleccion2" value="2">Jefe Delegacional &nbsp;&nbsp;
-				    <input type="radio" name="radioEleccion" id="radioEleccion3" value="3" checked>Diputado de Mayoria Relativa
-					<br/>
-				</div>
-				<br/>
-
-				<div><h3>Fuente de Datos:</h3></div>
-				<div style="position:relative;text-align:center;">
-					<br/>
-					<input type="radio" name="radioDatos" id="radioDatos1" value="1" checked>Candidatura Comun &nbsp;&nbsp;
-				    <input type="radio" name="radioDatos" id="radioDatos2" value="2">Partido Politico
-					<br/>
-				</div>
-				<br/>
-
-				<div><h3>Presentacion de Datos:</h3></div>
-				<div style="position:relative;text-align:center;">
-					<br/>
-					<input type="radio" name="radioTipo" id="radioTipo1" value="1" onClick="javascript:changeText(1)">Entidad &nbsp;&nbsp;
-				    <input type="radio" name="radioTipo" id="radioTipo2" value="2" onClick="javascript:changeText(2)">Delegacion &nbsp;&nbsp;
-				    <input type="radio" name="radioTipo" id="radioTipo3" value="3" onClick="javascript:changeText(3)">Distrito &nbsp;&nbsp;
-				    <input type="radio" name="radioTipo" id="radioTipo4" value="4" onClick="javascript:changeText(4)">Seccion
-					<br/>
-				</div>
-				<br/>
-
-				<div><h3>Opciones:</h3>
-					<div>
-						<br/>
-							<div id="formulario" style="margin-left:20px; margin-right:20px;"></div>
-
-						<div style="text-align:center; margin-right:10px;"><br/>
-							Tematico:
-							<select name="mapa" id="mapa">
-								<option value="0">Seleccione</option>
-							    <option value="1" selected>Primer Lugar</option>
-								<option value="2">Segundo Lugar</option>
-								<option value="3">Tercer Lugar</option>
-							    <option value="4">Posicion PRD</option>
-							</select>
-							&nbsp;&nbsp;
-							<input name="diff" id="diff" type="checkbox" value="1">Con diferencias.
-							&nbsp;&nbsp;
-							Transparencia:
-							<select name="transp" id="transp">
-								<option value="1" selected>0%</option>
-							    <option value="0.75">25%</option>
-							    <option value="0.5">50%</option>
-								<option value="0.25">75%</option>
-							    <option value="0">100%</option>
-							</select>
-							<br/><br/>
-						</div>
-
-						<center>
-							<input name="ir" type="button" class="css3button" id="ir" onClick="javascript:ir();" value="Buscar">
-							<input name="regresar" type="button" class="css3button" id="regresar" onClick="javascript:inicio();" value="Inicio">
-						</center>
-						<br/><br/>
-					</div> 
-				</div>
-			</div>
-</center>-->

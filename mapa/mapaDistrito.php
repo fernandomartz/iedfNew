@@ -73,7 +73,7 @@ $xdistrito = array();
     <script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
     <script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&callback=initMap"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;
@@ -195,10 +195,10 @@ $xdistrito = array();
 
 				//CENTROIDE DE LA PRIMERA COORDENADA
 				var bounds = new google.maps.LatLngBounds();
-				var i;
+				/*var i; // Comentado por Joel
 				for (i = 0; i < Coords01.length; i++) {
 			  		bounds.extend(Coords01[i]);
-				}
+				}*/
 			  	var myLatLng = bounds.getCenter();
 
 				//OPCIONES DE MAPA
@@ -224,7 +224,7 @@ $xdistrito = array();
 			//-----------------------------------------------------------------------------------------------
 
 			<?php
-			if($lim==1) {
+			if($lim==1) { 
 				for($di=1; $di < $dnumPoly; $di++)
 				{
 			?>

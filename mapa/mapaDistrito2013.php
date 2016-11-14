@@ -70,138 +70,138 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 	<script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
 	<script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&callback=initMap"></script>
 	<script language="javascript" src="js/ajax.js"></script>
 	<script>
-		var map;
+		var map;	
 		var infoWindow;
-		var datos = <?php echo $datos; ?>;
+		var datos = <?php echo $datos; ?>;	
 		function initialize() {
 
-		//-----------------------------------------------------------------------------------------------
-		<?php
-		if($lim==1) {
-			$dsql1= "SELECT * FROM ".$tbl_distrito." ORDER BY distrito, orden";
-			$drs = $db->execute($dsql1);
-			$ini_distrito=$drs->fields[2];
-			$xdistrito[$dnumPoly]=$ini_distrito;
-			$dnumPuntos = 1;
-
-			?>//COORDENADAS
-				var dCoords0<?php echo $dnumPoly; ?> = [
+			//-----------------------------------------------------------------------------------------------
 			<?php
-				while(!$drs->EOF)
-				{
-					$fin_distrito = $drs->fields[2];
-					if($ini_distrito==$fin_distrito){
-						$dcadena = "new google.maps.LatLng(".$drs->fields[4].")";
-						/*if($dnumPuntos>=1)
-							$dcadena = $dcadena.",\n".$dcadena;*/
-						if($dnumPuntos==0) { $dcadena.="\n"; } else { $dcadena.=",\n"; }
-
-						echo $dcadena;
-						$dnumPuntos++;
-					}else{
-						//$dcadena.="\n";
-						//$dcadena = substr($dcadena,0,strlen($dcadena)-2);
-						//echo $dcadena."\n";
-
-						$dsql3="SELECT COUNT(*) FROM redistritacion where tipo=2 and anterior='".$ini_distrito."'";
-						$drs3 = $db->execute($dsql3);
-						$color="#FFFF00";
-						$lcolor="#000";
-
-						if($drs3->fields[0]>0){
-							$color="#FF0000";
-							$lcolor="#FCD209";
-						}
-
-			?>
-						];
-						var dPol0<?php echo $dnumPoly; ?>;
-						dPol0<?php echo $dnumPoly; ?> = new google.maps.Polygon({ paths: dCoords0<?php echo $dnumPoly; ?>, strokeColor: '<?php echo $lcolor; ?>', strokeWeight: 1.3, fillColor: '<?php echo $color; ?>', fillOpacity: '<?php echo $fillop; ?>', zIndex: 1});
-			    <?php /****reinicilizo porque cambia el distrito************/
-						$xdistrito[$dnumPoly]=$ini_distrito;
-						$dnumPoly++;
-						$dnumPuntos = 1;
-						$ini_distrito = $drs->fields[2];
-				?>
-						var dCoords0<?php echo $dnumPoly; ?> = [
-				<?php
-						$dcadena= "new google.maps.LatLng(".$drs->fields[4].")";
-						$dcadena.=",\n";
-						echo $dcadena;
-						$dnumPuntos++;
-					}
-					$drs->MoveNext();
-				} //while
-
-				$color="#FFFF00";
-				$lcolor="#000";
-
-				$dsql3="SELECT COUNT(*) FROM redistritacion where tipo=2 and anterior='".$ini_distrito."'";
-				$drs3 = $db->execute($dsql3);
-
-
-				if($drs3->fields[0]>0){
-					$color="#FF0000";
-					$lcolor="#FCD209";
-				}
+			if($lim==1) {
+				$dsql1= "SELECT * FROM ".$tbl_distrito." ORDER BY distrito, orden";
+				$drs = $db->execute($dsql1);
+				$ini_distrito=$drs->fields[2];
 				$xdistrito[$dnumPoly]=$ini_distrito;
-				?>
-				];
-				var dPol0<?php echo $dnumPoly; ?>;
-				dPol0<?php echo $dnumPoly; ?> = new google.maps.Polygon({ paths: dCoords0<?php echo $dnumPoly; ?>, strokeColor: '<?php echo $lcolor; ?>', strokeWeight: 1.3, fillColor: '<?php echo $color; ?>', fillOpacity: '<?php echo $fillop; ?>', zIndex: 1});
-
+				$dnumPuntos = 1;
+						
+				?>//COORDENADAS
+					var dCoords0<?php echo $dnumPoly; ?> = [
 				<?php
-				$dnumPoly++;
+					while(!$drs->EOF)
+					{			
+						$fin_distrito = $drs->fields[2];
+						if($ini_distrito==$fin_distrito){
+							$dcadena = "new google.maps.LatLng(".$drs->fields[4].")";
+							/*if($dnumPuntos>=1)
+								$dcadena = $dcadena.",\n".$dcadena;*/
+							if($dnumPuntos==0) { $dcadena.="\n"; } else { $dcadena.=",\n"; }
+								
+							echo $dcadena;
+							$dnumPuntos++;
+						}else{	
+							//$dcadena.="\n";
+							//$dcadena = substr($dcadena,0,strlen($dcadena)-2);
+							//echo $dcadena."\n";
+							
+							$dsql3="SELECT COUNT(*) FROM redistritacion where tipo=2 and anterior='".$ini_distrito."'";
+							$drs3 = $db->execute($dsql3);
+							$color="#FFFF00";
+							$lcolor="#000";
+							
+							if($drs3->fields[0]>0){
+								$color="#FF0000";
+								$lcolor="#FCD209";	
+							}
+								
+				?>
+							];
+							var dPol0<?php echo $dnumPoly; ?>;
+							dPol0<?php echo $dnumPoly; ?> = new google.maps.Polygon({ paths: dCoords0<?php echo $dnumPoly; ?>, strokeColor: '<?php echo $lcolor; ?>', strokeWeight: 1.3, fillColor: '<?php echo $color; ?>', fillOpacity: '<?php echo $fillop; ?>', zIndex: 1});
+				    <?php /****reinicilizo porque cambia el distrito************/
+							$xdistrito[$dnumPoly]=$ini_distrito;
+							$dnumPoly++;
+							$dnumPuntos = 1;
+							$ini_distrito = $drs->fields[2];
+					?>		
+							var dCoords0<?php echo $dnumPoly; ?> = [
+					<?php						
+							$dcadena= "new google.maps.LatLng(".$drs->fields[4].")";
+							$dcadena.=",\n";
+							echo $dcadena;
+							$dnumPuntos++;							
+						}			
+						$drs->MoveNext();			
+					} //while 
 
-		} //if limites distritales
-		?>
-		//-----------------------------------------------------------------------------------------------
+					$color="#FFFF00";
+					$lcolor="#000";
+					
+					$dsql3="SELECT COUNT(*) FROM redistritacion where tipo=2 and anterior='".$ini_distrito."'";
+					$drs3 = $db->execute($dsql3);
+					
+					
+					if($drs3->fields[0]>0){
+						$color="#FF0000";
+						$lcolor="#FCD209";	
+					}
+					$xdistrito[$dnumPoly]=$ini_distrito;
+					?>
+					];
+					var dPol0<?php echo $dnumPoly; ?>;
+					dPol0<?php echo $dnumPoly; ?> = new google.maps.Polygon({ paths: dCoords0<?php echo $dnumPoly; ?>, strokeColor: '<?php echo $lcolor; ?>', strokeWeight: 1.3, fillColor: '<?php echo $color; ?>', fillOpacity: '<?php echo $fillop; ?>', zIndex: 1});
+							
+					<?php
+					$dnumPoly++;
+					
+			} //if limites distritales
+			?>
+			//-----------------------------------------------------------------------------------------------
 
-			//CENTROIDE DE LA PRIMERA COORDENADA
-			/*var bounds = new google.maps.LatLngBounds();
-			var i;
-			for (i = 0; i < dCoords016.length; i++) {
-		  		bounds.extend(dCoords016[i]);
-			}*/
-		  	//var myLatLng = bounds.getCenter();
+				//CENTROIDE DE LA PRIMERA COORDENADA
+				/*var bounds = new google.maps.LatLngBounds();
+				var i;
+				for (i = 0; i < dCoords016.length; i++) {
+			  		bounds.extend(dCoords016[i]);
+				}*/
+			  	//var myLatLng = bounds.getCenter();
+				
+				var myLatLng = new google.maps.LatLng('19.347904','-99.167116');
+				//OPCIONES DE MAPA
+			  	var mapOptions = {
+			    	zoom: 11,
+			    	center: myLatLng,
+					panControl: false,
+					streetViewControl: false,
+					mapTypeControl: true,
+			    	mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+					zoomControl: true,
+			    	zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL
+			    	},
+			    	mapTypeId: google.maps.MapTypeId.ROADMAP
+			  	};
+			    
+				//Asignar mapa al DIV
+			  	map = new google.maps.Map(document.getElementById('map-canvas2'),
+			      	mapOptions);
+				
+				
+			//-----------------------------------------------------------------------------------------------
 
-			var myLatLng = new google.maps.LatLng('19.347904','-99.167116');
-			//OPCIONES DE MAPA
-		  	var mapOptions = {
-		    	zoom: 11,
-		    	center: myLatLng,
-				panControl: false,
-				streetViewControl: false,
-				mapTypeControl: true,
-		    	mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-				zoomControl: true,
-		    	zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL
-		    	},
-		    	mapTypeId: google.maps.MapTypeId.ROADMAP
-		  	};
-
-			//Asignar mapa al DIV
-		  	map = new google.maps.Map(document.getElementById('map-canvas2'),
-		      	mapOptions);
-
-
-		//-----------------------------------------------------------------------------------------------
-
-		<?php
-		//-----------------------------------------------------------------------------------------------
-		//Asignar las secciones al mapa, crear el escucha del poligono y la funcion a realizar.
-		for($i=1; $i < $dnumPoly; $i++){
-		?>
-				dPol0<?php echo $i; ?>.setMap(map);
-				google.maps.event.addListener(dPol0<?php echo $i; ?>, 'click', function(){
-					loadXMLDoc4('<?php echo $seccion; ?>','<?php echo $xdistrito[$i]; ?>','<?php echo $tipo; ?>','<?php echo "2013"; ?>'); });
-		<?php } ?>
-		}
-			//Cargar mapa cuando inicie la pagina.
-			google.maps.event.addDomListener(window, 'load', initialize);
+			<?php 
+			//-----------------------------------------------------------------------------------------------
+			//Asignar las secciones al mapa, crear el escucha del poligono y la funcion a realizar.
+			/*for($i=1; $i < $dnumPoly; $i++){
+			?>
+					dPol0<?php echo $i; ?>.setMap(map);
+					google.maps.event.addListener(dPol0<?php echo $i; ?>, 'click', function(){
+						loadXMLDoc4('<?php echo $seccion; ?>','<?php echo $xdistrito[$i]; ?>','<?php echo $tipo; ?>','<?php echo "2013"; ?>'); });	
+			<?php }*/ ?>
+			}
+				//Cargar mapa cuando inicie la pagina.
+				google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
 </head>
 <body>
@@ -212,19 +212,22 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 	    <div class="col-lg-6 col-sm-1 navbar-header">
 	        <br>
 	        <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../redistritacion.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Redistritación</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+	    	<br>
 	    </div>
 	</nav>
 	<!-- Carga de datos -->
 	<div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
-		<div style="padding-left::5px; background-color:#FFF; font-size:14px;">
+		<div style="padding-left::5px; font-size:14px;">
+			<br>
 			<strong><?php echo $titulo; ?></strong>
+			<br><br>
 		</div>	
 	</div>		
-			<br>
-		<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
-		<!-- Carga del mapa -->
-		</div>
 		<br><br>
+	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+	<!-- Carga del mapa -->
+	</div>
+	<br><br>
 	<!--<div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
 			<?php
 			/*if($diff==1) { include('inc/colores'.$anio.'Dif.php'); }
