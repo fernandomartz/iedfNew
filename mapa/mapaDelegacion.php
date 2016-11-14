@@ -193,12 +193,14 @@ $xdistrito = array();
 				//-----------------------------------------------------------------------------------------------
 
 					//CENTROIDE DE LA PRIMERA COORDENADA
-					var bounds = new google.maps.LatLngBounds();
-					/*var i; // Comentado por Joel
+					/*var bounds = new google.maps.LatLngBounds();
+					var i; // Comentado por Joel
 					for (i = 0; i < Coords01.length; i++) {
 				  		bounds.extend(Coords01[i]);
-					}*/
-				  	var myLatLng = bounds.getCenter();
+					}
+				  	var myLatLng = bounds.getCenter();*/
+			  		
+			  		var myLatLng = new google.maps.LatLng('19.347904','-99.167116');// Comentado por Joel
 
 					//OPCIONES DE MAPA
 				  	var mapOptions = {

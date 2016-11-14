@@ -71,7 +71,7 @@ $xdistrito = array();
     <script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
     <script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&callback=initMap"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;
@@ -147,12 +147,14 @@ $xdistrito = array();
 			//-----------------------------------------------------------------------------------------------
 
 				//CENTROIDE DE LA PRIMERA COORDENADA
-				var bounds = new google.maps.LatLngBounds();
+				/*var bounds = new google.maps.LatLngBounds();
 				var i;
 				for (i = 0; i < Coords01.length; i++) {
 			  		bounds.extend(Coords01[i]);
 				}
-			  	var myLatLng = bounds.getCenter();
+			  	var myLatLng = bounds.getCenter();*/
+
+			  	var myLatLng = new google.maps.LatLng('19.347904','-99.167116');// Comentado por Joel
 
 				//OPCIONES DE MAPA
 			  	var mapOptions = {
@@ -202,13 +204,16 @@ $xdistrito = array();
         </div>
         <div class="col-lg-6 col-sm-1 navbar-header">
             <br>
-            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../redistritacion.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Redistritación</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+        	<br>
         </div>
     </nav>
     <!-- Carga de datos -->
     <div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
-		<div style="padding-left::5px; background-color:#FFF; font-size:14px;">
+		<div style="padding-left::5px; font-size:14px;">
+			<br>
 			<strong><?php echo $titulo; ?></strong>
+			<br><br>
 		</div>	
 	</div>		
  		<br>
@@ -218,7 +223,7 @@ $xdistrito = array();
 		<br><br>
 	<!-- Recuadro de informacion -->
  	<div class="wrapper wrapper-content animated fadeInRight" style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
-		<br><br>
+		<br><br><br><br><br>
 		<?php
 			if($diff==1) { 
 				include('inc/colores'.$anio.'Dif.php'); 
