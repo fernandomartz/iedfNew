@@ -63,7 +63,7 @@ $xdistrito = array();
     <link href="css/default.css" rel="stylesheet">
 	<link href="../css/style2.css" rel="stylesheet" type="text/css">
 	<link href="../css/font/font.css" rel="stylesheet" type="text/css">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&sensor=false"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;

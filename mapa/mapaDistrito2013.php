@@ -15,14 +15,14 @@ set_time_limit(0);
 // ===========================================================================================================================
 header('Content-Type: text/html; charset=utf-8');
 //Valores por GET
-/*$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
+$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = $_GET['anio'];		//Año de Eleccion
 $datos = $_GET['datos'];	//Tipo de Dato Candidatura Comun:1 - Partido Politico.
 $lugar = $_GET['tem'];		//Posicion en la eleccion (Primer Lugar, Segundo Lugar, Tercer lugar).
 $transp = $_GET['trans'];	//Transparencia.
 $diff = $_GET['diff'];  	//Muestra las diferencias en porcentajes determinado por varios colores.
 $dis = $_GET['dis'];		//Distrito a visualizar
-$lim = $_GET['lim'];		//Limites Distritales (Si/No)*/
+$lim = $_GET['lim'];		//Limites Distritales (Si/No)
 
 $tipo = 1;		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = 2012;		//Año de Eleccion
@@ -60,7 +60,7 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
     <link href="css/default.css" rel="stylesheet">
 	<link href="../css/style2.css" rel="stylesheet" type="text/css">
 	<link href="../css/font/font.css" rel="stylesheet" type="text/css">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&sensor=false"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;
@@ -151,12 +151,12 @@ if($lim==1) {
 //-----------------------------------------------------------------------------------------------
 
 	//CENTROIDE DE LA PRIMERA COORDENADA
-	/*var bounds = new google.maps.LatLngBounds();
+	var bounds = new google.maps.LatLngBounds();
 	var i;
 	for (i = 0; i < dCoords016.length; i++) {
   		bounds.extend(dCoords016[i]);
-	}*/
-  	//var myLatLng = bounds.getCenter();
+	}
+    var myLatLng = bounds.getCenter();
 
 	var myLatLng = new google.maps.LatLng('19.347904','-99.167116');
 	//OPCIONES DE MAPA
