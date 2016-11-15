@@ -15,14 +15,14 @@ set_time_limit(0);
 // ===========================================================================================================================
 header('Content-Type: text/html; charset=utf-8');
 //Valores por GET
-/*$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
+$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = $_GET['anio'];		//Año de Eleccion
 $datos = $_GET['datos'];	//Tipo de Dato Candidatura Comun:1 - Partido Politico.
 $lugar = $_GET['tem'];		//Posicion en la eleccion (Primer Lugar, Segundo Lugar, Tercer lugar).
 $transp = $_GET['trans'];	//Transparencia.
 $diff = $_GET['diff'];  	//Muestra las diferencias en porcentajes determinado por varios colores.
 $dis = $_GET['dis'];		//Distrito a visualizar
-$lim = $_GET['lim'];		//Limites Distritales (Si/No)*/
+$lim = $_GET['lim'];		//Limites Distritales (Si/No)
 
 $tipo = 1;		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = 2012;		//Año de Eleccion
@@ -88,7 +88,7 @@ $titulo .=  ($_GET['redist']==0 ? "2012" : "2015");
 	<script type="text/javascript" src="../css/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../css/metisMenu/metisMenu.min.js"></script>
 	<script type="text/javascript" src="../css/metisMenu/style.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJtZ6XHmDWDD0XQOmRLpalkxaL4U8AiWQ&sensor=false"></script>
     <script language="javascript" src="js/ajax.js"></script>
     <script>
 		var map;
