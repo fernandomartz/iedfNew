@@ -15,14 +15,14 @@ set_time_limit(0);
 // ===========================================================================================================================
 header('Content-Type: text/html; charset=utf-8');
 //Valores por GET
-$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
+/*$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = $_GET['anio'];		//Año de Eleccion
 $datos = $_GET['datos'];	//Tipo de Dato Candidatura Comun:1 - Partido Politico.
 $lugar = $_GET['tem'];		//Posicion en la eleccion (Primer Lugar, Segundo Lugar, Tercer lugar).
 $transp = $_GET['trans'];	//Transparencia.
 $diff = $_GET['diff'];  	//Muestra las diferencias en porcentajes determinado por varios colores.
 $dis = $_GET['dis'];		//Distrito a visualizar
-$lim = $_GET['lim'];		//Limites Distritales (Si/No)
+$lim = $_GET['lim'];		//Limites Distritales (Si/No)*/
 
 $tipo = 1;		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = 2012;		//Año de Eleccion
