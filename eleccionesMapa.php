@@ -75,7 +75,7 @@ function ir() {
 	//alert(display);
 
 	//var url = 'http://nemesoftware.com/sepe2014/mapa/';
-	var url = 'http://localhost/sepe2014/mapa/';
+	var url = 'http://localhost/iedfNew/mapa/';
 	var activarUrl = false;
 
 	if(valueTipo==1) {
