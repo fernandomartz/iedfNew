@@ -276,7 +276,7 @@ $xdistrito = array();
 		</div>		
      		<br><br>
      	<div class="col-md-6">
-	     	<div id="map-canvas2" style="width: 1450px; height: 600px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+	     	<div id="map-canvas2" style="width: 1450px; height: 650px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
 	     		<!-- Carga del mapa -->
 	     	</div>
 	     	<!--<iframe width="100%" height="520" frameborder="0" src="https://yoryyosyyoel.carto.com/viz/edd799a0-a6a8-11e6-ad60-0ee66e2c9693/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>-->

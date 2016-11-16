@@ -15,23 +15,26 @@ set_time_limit(0);
 // ===========================================================================================================================
 header('Content-Type: text/html; charset=utf-8');
 //Valores por GET
-/*$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
+$tipo = $_GET['tipo'];		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
 $anio = $_GET['anio'];		//Año de Eleccion
 $datos = $_GET['datos'];	//Tipo de Dato Candidatura Comun:1 - Partido Politico.
 $lugar = $_GET['tem'];		//Posicion en la eleccion (Primer Lugar, Segundo Lugar, Tercer lugar).
 $transp = $_GET['trans'];	//Transparencia.
 $diff = $_GET['diff'];  	//Muestra las diferencias en porcentajes determinado por varios colores.
 $dis = $_GET['dis'];		//Distrito a visualizar
-$lim = $_GET['lim'];		//Limites Distritales (Si/No)*/
+$lim = $_GET['lim'];		//Limites Distritales (Si/No)
 
 $tipo = 1;		//Tipo de Eleccion (Jefe de Gobierno, Jefe de Delegacion, Diputado)
-$anio = 2012;		//Año de Eleccion
-$datos = 1;	//Tipo de Dato Candidatura Comun:1 - Partido Politico:2.
+$anio = 2012;	//Año de Eleccion
+$datos = 1;		//Tipo de Dato Candidatura Comun:1 - Partido Politico:2.
 $lugar = 1;		//Posicion en la eleccion (Primer Lugar, Segundo Lugar, Tercer lugar).
 $transp = 1;	//Transparencia.
-//$diff = 1;  	//Muestra las diferencias en porcentajes determinado por varios colores.
-//$dis = 'IX';		//Distrito a visualizar
+$diff = 1;  	//Muestra las diferencias en porcentajes determinado por varios colores.
+$dis = 'IX';	//Distrito a visualizar
 $lim = 1;		//Limites Distritales (Si/No)
+
+//Verificar el Tipo de Datos a mostrar para incluir en el titulo de la pagina.
+if($datos==1) { $fp='diffp'; $titulo.=" / Candidatura Comun"; } else { $fp='dif'; $titulo.=" / Partido Politico"; }
 
 //Transperencia del color de los poligonos.
 $fillop = $transp;
@@ -207,6 +210,59 @@ for($i=1; $i < $dnumPoly; $i++){
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="col-lg-2 col-sm-3 text-center navbar-header">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <div class="col-lg-6 col-sm-1 navbar-header">
+            <br>
+        	<h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../redistritacion.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Redistritación</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+        	<br>
+        </div>
+    </nav>
+   	<!-- Carga de datos -->
+    <div class="col-md-12 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
+		<div style="padding-left::5px; font-size:16px;">
+			<br>
+			<strong><?php echo $titulo; ?></strong>
+			<br><br>
+		</div>	
+	</div>		
+ 		<br><br>
+ 	<div class="col-md-6">
+     	<div id="map-canvas2" style="width: 1450px; height: 650px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+     		<!-- Carga del mapa -->
+     	</div>
+     	<!--<iframe width="100%" height="520" frameborder="0" src="https://yoryyosyyoel.carto.com/viz/edd799a0-a6a8-11e6-ad60-0ee66e2c9693/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>-->
+    	<br><br>
+   	</div>
+	<!-- Recuadro de informacion -->
+    <div class="col-md-6">
+	    <div class="col-md-6">
+	     	<!--<div class="table table-inverse table-striped table-condensed table-responsive wrapper wrapper-content animated fadeInRight">
+				<?php
+					if($diff==1) { 
+						include('inc/colores'.$anio.'Dif.php'); 
+					} else { 
+						include('inc/colores'.$anio.'Ind.php'); 
+					}
+				?>
+	    	</div>-->
+	    </div>
+	    <div class="col-md-6">
+	     	<div class="table table-inverse table-striped table-condensed table-responsive wrapper wrapper-content animated fadeInRight" id="datos">
+	     		<?php 
+	     			if($tipo == 2 && $anio==2003) {
+	     				
+	     			}else{
+	     				
+	     			} 
+	     		?> 
+	     	</div>
+	    </div>
+    </div>
+</body>
+<!--<body>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 	    <div class="col-lg-2 col-sm-3 text-center navbar-header">
 	        <a class="navbar-brand" href="#"></a>
 	    </div>
@@ -216,8 +272,8 @@ for($i=1; $i < $dnumPoly; $i++){
 	    	<br>
 	    </div>
 	</nav>
-	<!-- Carga de datos -->
-	<div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
+	< Carga de datos >
+	<div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> < Texto de informacion >
 		<div style="padding-left::5px; font-size:14px;">
 			<br>
 			<strong><?php echo $titulo; ?></strong>
@@ -226,16 +282,16 @@ for($i=1; $i < $dnumPoly; $i++){
 	</div>		
 		<br><br>
 	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
-	<!-- Carga del mapa -->
+	< Carga del mapa >
 	</div>
 	<br><br>
-	<!--<div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
+	< <div style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
 			<?php
 			/*if($diff==1) { include('inc/colores'.$anio.'Dif.php'); }
 			else { include('inc/colores'.$anio.'Ind.php'); }*/
 			?>
-	</div>-->
+	</div> >
 	<div id="datos" style="position: absolute; width: 300px; height: 200px; top: 270px; left: 820px; border=1;">	
 	</div>
-</body>
+</body>-->
 </html>

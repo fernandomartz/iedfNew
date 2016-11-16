@@ -196,50 +196,103 @@ $xdistrito = array();
 	</script>
   </head>
   <body>
-	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="col-lg-2 col-sm-3 text-center navbar-header">
-            <a class="navbar-brand" href="#"></a>
-        </div>
-        <div class="col-lg-6 col-sm-1 navbar-header">
-            <br>
-            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
-        	<br>
-        </div>
-    </nav>
-    <!-- Carga de datos -->
-    <div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
-		<div style="padding-left::5px; font-size:14px;">
-			<br>
-			<strong><?php echo $titulo; ?></strong>
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+	        <div class="col-lg-2 col-sm-3 text-center navbar-header">
+	            <a class="navbar-brand" href="#"></a>
+	        </div>
+	        <div class="col-lg-6 col-sm-1 navbar-header">
+	            <br>
+	            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+	        	<br>
+	        </div>
+	    </nav>
+	   <!-- Carga de datos -->
+	    <div class="col-md-12 text-center text-success wrapper wrapper-content animated fadeInRight"> <!-- Texto de informacion -->
+			<div style="padding-left::5px; font-size:16px;">
+				<br>
+				<strong><?php echo $titulo; ?></strong>
+				<br><br>
+			</div>	
+		</div>		
+     		<br><br>
+     	<div class="col-md-6">
+	     	<div id="map-canvas2" style="width: 1450px; height: 650px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+	     		<!-- Carga del mapa -->
+	     	</div>
+	     	<!--<iframe width="100%" height="520" frameborder="0" src="https://yoryyosyyoel.carto.com/viz/edd799a0-a6a8-11e6-ad60-0ee66e2c9693/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>-->
+	    	<br><br>
+	   	</div>
+    	<!-- Recuadro de informacion -->
+	    <div class="col-md-6">
+		    <div class="col-md-4">
+		     	<div class="table table-inverse table-striped table-condensed table-responsive wrapper wrapper-content animated fadeInRight">
+					<?php
+						if($diff==1) { 
+							include('inc/colores'.$anio.'Dif.php'); 
+						} else { 
+							include('inc/colores'.$anio.'Ind.php'); 
+						}
+					?>
+		    	</div>
+		    </div>
+		    <div class="col-md-8">
+		     	<div class="table table-inverse table-striped table-condensed table-responsive wrapper wrapper-content animated fadeInRight" id="datos">
+		     		<?php 
+		     			if($tipo == 2 && $anio==2003) {
+		     				
+		     			}else{
+		     				
+		     			} 
+		     		?> 
+		     	</div>
+		    </div>
+	    </div>
+  	</body>
+  	<!--<body>
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+	        <div class="col-lg-2 col-sm-3 text-center navbar-header">
+	            <a class="navbar-brand" href="#"></a>
+	        </div>
+	        <div class="col-lg-6 col-sm-1 navbar-header">
+	            <br>
+	            <h4><strong><a type="button" class="btn btn-primary wrapper wrapper-content animated fadeInRight" href="../eleccionesMapa.php" role="button"><i class="glyphicon glyphicon-chevron-left"></i> Mapa Tematico</a> <i class="glyphicon glyphicon-qrcode"></i> Sistema Estadistico de Procesos Electorales (SEPE)</strong></h4>
+	        	<br>
+	        </div>
+	    </nav>
+	    < Carga de datos >
+	    <div class="col-md-6 text-center text-success wrapper wrapper-content animated fadeInRight"> < Texto de informacion >
+			<div style="padding-left::5px; font-size:14px;">
+				<br>
+				<strong><?php echo $titulo; ?></strong>
+				<br><br>
+			</div>	
+		</div>		
+	 		<br>
+	 	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
+	 		< Carga del mapa >
+	 	</div>
 			<br><br>
-		</div>	
-	</div>		
- 		<br>
- 	<div id="map-canvas2" style="width: 800px; height: 800px; border-style:solid; border-width:1px; border-color:#000; margin-left:5px;">
- 		<!-- Carga del mapa -->
- 	</div>
-		<br><br>
-	<!-- Recuadro de informacion -->
- 	<div class="wrapper wrapper-content animated fadeInRight" style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
-		<br><br><br><br><br>
-		<?php
-			if($diff==1) { 
-				include('inc/colores'.$anio.'Dif.php'); 
-			} else { 
-				include('inc/colores'.$anio.'Ind.php'); 
-			}
-		?>
-		<br><br>
-	 </div>
- 	<div class="wrapper wrapper-content animated fadeInRight" id="datos" style="position: absolute; 
- 		<?php 
- 			if($tipo == 2 && $anio==2003) {
- 				echo 'top: 570px;';
- 			}else{
- 				echo 'top: 370px;';
- 			} 
- 		?> 
- 		width: 300px; height: 200px; left: 820px; border=1;">
- 	</div><!-- 2012:300 / 2009:370 -->
-  </body>
+		< Recuadro de informacion >
+	 	<div class="wrapper wrapper-content animated fadeInRight" style="position:absolute; width:100px; height:200px; top:80px; left:820px;border=1;">
+			<br><br><br><br><br>
+			<?php
+				if($diff==1) { 
+					include('inc/colores'.$anio.'Dif.php'); 
+				} else { 
+					include('inc/colores'.$anio.'Ind.php'); 
+				}
+			?>
+			<br><br>
+		 </div>
+	 	<div class="wrapper wrapper-content animated fadeInRight" id="datos" style="position: absolute; 
+	 		<?php 
+	 			if($tipo == 2 && $anio==2003) {
+	 				echo 'top: 570px;';
+	 			}else{
+	 				echo 'top: 370px;';
+	 			} 
+	 		?> 
+	 		width: 300px; height: 200px; left: 820px; border=1;">
+	 	</div>< 2012:300 / 2009:370 >
+  	</body>-->
 </html>
