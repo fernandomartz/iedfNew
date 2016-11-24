@@ -14,7 +14,7 @@ if(!$conectado) {
 $cantidad=999;
 
 //Verifica que la Tabla este Vacia
-$rs0 = $db->execute("select count(*) from jdfp2015");
+$rs0 = $db->execute("select count(*) from jd2015fp");
 $cantidad=$rs0->fields[0];
 echo "Registro existentes en la Tabla: ".$cantidad."<br/>";
 
@@ -44,7 +44,7 @@ if($cantidad < 1)
 		//JD2015
 		//DIS,DEL,SECC,CASILLA,PAN,PRI,PRD,PVEM,PT,MC,NA,MORENA,PH,ES,CC1,CC2,CC3,CC4,CC5,CC6,CC7,NULOS,VOTOS,LISTA
 		//0   1   2    3       4   5   6   7    8  9  10 11     12 13 14  15  16  17  18  19  20  21    22    23
-  		$sql = "insert into jdfp2015 (distrito,del,seccion,casilla,pan,pri,prd,pvem,pt,mc,na,morena,ph,es,cc1,cc2,cc3,cc4,cc5,cc6,cc7,nulos,votos,lista) ";
+  		$sql = "insert into jd2015fp (distrito,del,seccion,casilla,pan,pri,prd,pvem,pt,mc,na,morena,ph,es,cc1,cc2,cc3,cc4,cc5,cc6,cc7,nulos,votos,lista) ";
 		$sql .= "values ('".$arreglo[0]."'"; //distrito
 		$sql .= ",".$arreglo[1];		//clave_del
 		$sql .= ",".$arreglo[2];		//seccion
