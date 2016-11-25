@@ -4,7 +4,8 @@ include("../../../adodb/adodb.inc.php");
 $db = ADONewConnection("mysql");
 $db->debug = "true";
 $conectado = $db->Connect("localhost", "root", "123", "iedf");
-if(!$conectado) {echo "<br/>No se conecto a la Base de Datos<br/>";
+if(!$conectado) {
+	echo "<br/>No se conecto a la Base de Datos<br/>";
  } else {
  	echo "<br/>Conectado a la Base de Datos<br/>";
 }
@@ -29,7 +30,7 @@ if($cantidad < 1)
 		//Dividir en un arreglo los valores de la fila
 		$arreglo = explode(",", $cadena);
 			//echo $total_lineas ." ". fgets($file). "<br />"; // Muestra los datos de la base de datos
-		if($total_lineas==0)
+		if($total_lineas==-1)
 		{
 			echo "Salta<br/>";
 		} else {

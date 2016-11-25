@@ -28,7 +28,7 @@ $rs = $db->execute($sql);
 $del = $rs->fields[2];
 
 if($del==""){
-	$sql = "select * from ". $tipoEleccion ."2012fp where distrito='".$distrito."'";
+	$sql = "select * from ". $tipoEleccion ."2015fp where distrito='".$distrito."'";
 	$rs = $db->execute($sql);
 	$distrito = $rs->fields[1];
 	$del = $rs->fields[2];
@@ -40,7 +40,10 @@ $delx = $rs->fields[2];
 $delnom = $del_name[$delx]; 
 
 
-$sql2= "SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( pvem ) , SUM( na ) , SUM( cc1 ) , SUM( cc2 ) , SUM( nulos ) , SUM( votos ) , SUM( lista ) FROM ". $tipoEleccion ."2012fp ";
+$sql2= "SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , 
+SUM( pri ) , SUM( prd ) , SUM( pvem ) , SUM( pt ) , SUM( na ) , SUM( mc ) , SUM( morena ) , SUM( ph ), SUM( es ) ,
+SUM( cc1 ) , SUM( cc2 ) , SUM( cc3 ) , SUM( cc4 ) 
+SUM( nulos ) , SUM( votos ) , SUM( lista ) FROM ". $tipoEleccion ."2015fp ";
 
 $texto = "Posición por el número total de votos ";
 
@@ -73,29 +76,40 @@ if($dato==3) {
 	}
 }
 if($dato==4) {
-	$sql2= "SELECT 1=1, 2=2, 3=3, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( pvem ) , SUM( na ) , SUM( cc1 ) , SUM( cc2 ) , SUM( nulos ) , SUM( votos ) , SUM( lista ) FROM ". $tipoEleccion."2012fp ";
+	$sql2= "SELECT 1=1, 2=2, 3=3, COUNT( casilla ) , SUM( pan ) , 
+	SUM( pri ) , SUM( prd ) , SUM( pvem ) , SUM( pt ) , SUM( na ) , SUM( mc ) , SUM( morena ) , SUM( ph ), SUM( es ) ,
+	SUM( cc1 ) , SUM( cc2 ) , SUM( cc3 ) , SUM( cc4 ) 
+	SUM( nulos ) , SUM( votos ) , SUM( lista ) FROM ". $tipoEleccion."2015fp ";
 	$texto.="en el DF:";
 	}
 
-$vcc1 = 1;
-	// echo $sql."<br/>";
-if($tipo==3) {
+//$vcc1 = 1;
+	echo $sql."<br/>"; // descomentado 
+/*if($tipo==3) { // comentado
 		$sqlcc= "SELECT * FROM dmr2012discc WHERE distrito='".$distrito."'";
 		$rscc = $db->execute($sqlcc);
 		$vcc1 = $rscc->fields[2];		//verificar candidatura comun PRI - PVEM
-}
+}*/
 
-$rs2 = $db->execute($sql2);
+		$rs2 = $db->execute($sql2);
 
-$rpan	=$rs2->fields[4];
-$rpri	=$rs2->fields[5];
-$rpvem	=$rs2->fields[6];
-$rna	=$rs2->fields[7];
-$rcc1	=$rs2->fields[8];
-$rcc2	=$rs2->fields[9];
-$rVN = $rs2->fields[10];
-$rTV = $rs2->fields[11];
-$rLN = $rs2->fields[12];
+		$rpan	=$rs2->fields[4];
+		$rpri	=$rs2->fields[5];
+		$rprd   =$rs2->fields[6];
+		$rpvem	=$rs2->fields[7];
+		$rpt    =$rs2->fields[8];
+		$rmc    =$rs2->fields[9];
+		$rna	=$rs2->fields[10];
+		$rmorena =$rs2->fields[11];
+		$rph    =$rs2->fields[12];
+		$res    =$rs2->fields[13];  
+		$rcc1	=$rs2->fields[14];
+		$rcc2	=$rs2->fields[15];
+		$rcc3   =$rs2->fields[16];
+		$rcc4   =$rs2->fields[17];
+		$rVN = $rs2->fields[18];
+		$rTV = $rs2->fields[19];
+		$rLN = $rs2->fields[20];
 
 	$datos[] = array('partido' => 'PAN', 'votos' => $rpan);
 	$datos[] = array('partido' => 'NA', 'votos' => $rna);
@@ -114,8 +128,6 @@ foreach ($datos as $key => $row) {
     $voto[$key] = $row['votos'];
 }
 array_multisort($voto, SORT_DESC, $partidos, SORT_ASC, $datos); // SORT_DESC - SORT_ASC
-
-
 
 ?>
 <html>
@@ -142,8 +154,8 @@ array_multisort($voto, SORT_DESC, $partidos, SORT_ASC, $datos); // SORT_DESC - S
 	<?php if($srs->fields[0]!=""){?>
 	<center><br />
 	<table border="1" style="border-collapse:collapse;" cellpadding="0" cellspacing="0" summary="">
-    <th colspan="3">Redistritación 2012 - 2015</th>
-    <tr align="center" style="font-weight:bold;"><td width="80px">2012</td><td width="100px">Modificado 2012</td><td width="80px">2015</td></tr>
+    <th colspan="3">Redistritación 2015</th>
+    <tr align="center" style="font-weight:bold;"><td width="80px">2015</td><td width="100px">Modificado 2015</td><td width="80px">2015</td></tr>
     <tr align="center"><td><?php echo $srs->fields[0];?></td><td><?php echo $srs->fields[1];?></td><td><?php echo $srs->fields[2];?></td></tr>
     </table></center><?php }?><br />
 <?php if($seccion==""){?>

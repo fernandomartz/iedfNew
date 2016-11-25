@@ -9,8 +9,6 @@ $ale = rand(99999,99999999999);
 return($ale);
 }
 
-
-
 $distrito = $_GET['distrito'];
 $seccion = $_GET['seccion'];
 $dato = $_GET['dato'];

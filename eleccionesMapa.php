@@ -30,7 +30,7 @@
 		}
 
 		function ir() {
-		//alert("inicio");
+			//alert("inicio");
 			//var display;
 			var valueEleccion, valueDatos, valueTipo;
 			var diff = document.getElementById('diff').checked;
@@ -40,18 +40,18 @@
 			var valuelim = 0;
 			if (diff) { valuediff=1; }
 
-			valueEleccion = buscarRadio('radioEleccion',3);
-			valueDatos = buscarRadio('radioDatos',2);
-			valueTipo = buscarRadio('radioTipo',4);
-			optEleccion = buscarSelect('menueleccion');
-			optMapa = buscarSelect('mapa');
-			optTransp = buscarSelect('transp');
-			var lim = document.getElementById('limite').checked;
+			valueEleccion = buscarRadio('radioEleccion',3); //Eleccion DMR JD JG
+			valueDatos = buscarRadio('radioDatos',2); // Eleccion CC PP 
+			valueTipo = buscarRadio('radioTipo',4); // Eleccion Entidad Delegacion Distrito Seccion
+			optEleccion = buscarSelect('menueleccion'); // Eleccion del año
+			optMapa = buscarSelect('mapa'); // Eleccion de posicion 1, 2, 3
+			optTransp = buscarSelect('transp'); // Eleccion de la transparencia del mapa
+			var lim = document.getElementById('limite').checked; // Marcar los limites
 			if (lim) { valuelim=1; }
 				
-			//display = valueEleccion+" "+valueDatos+" "+valueTipo+" "+optEleccion+" "+optTransp+" "+optMapa+' '+diff;
+			display = valueEleccion+" "+valueDatos+" "+valueTipo+" "+optEleccion+" "+optTransp+" "+optMapa+' '+diff;
 
-		//alert(valueTipo);
+				//x|x|alert(valueTipo);
 
 			if(valueTipo==2)
 			{
@@ -106,19 +106,18 @@
 				activarUrl=true;
 			}
 
-		if(optEleccion==2009 && valueEleccion==1)
-			{
-				alert("No existe ese Tipo de Eleccion");
-			}
-		else
-			{
-				if(activarUrl) {
-					//alert(url+archivo+datos);
-					location.href=url+archivo+datos;
+			if(optEleccion==2009 && valueEleccion==1)
+				{
+					alert("No existe ese Tipo de Eleccion");
 				}
-				else { alert("Faltan datos por seleccionar"); }
-			}
-
+			else
+				{
+					if(activarUrl) {
+						//alert(url+archivo+datos);
+						location.href=url+archivo+datos;
+					}
+					else { alert("Faltan datos por seleccionar"); }
+				}
 		}
 
 		function buscarRadio(elemento,maxnum) {
@@ -140,7 +139,6 @@
 			value = e.options[e.selectedIndex].value;
 			return(value);
 		}
-
 
 		function inicio() {
 			location.href="principal.php";
@@ -230,7 +228,7 @@
 						    <option value="1" selected>Primer Lugar</option>
 							<option value="2">Segundo Lugar</option>
 							<option value="3">Tercer Lugar</option>
-						    <option value="4">Posicion PRD</option>
+						    <!--<option value="4">Posicion PRD</option>-->
 						</select>
 						&nbsp;&nbsp;
 						<input name="diff" id="diff" type="checkbox" value="1"> Con diferencias.

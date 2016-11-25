@@ -35,7 +35,7 @@ if($cantidad < 1)
 		$arreglo = explode(",", $cadena);
 		//echo $total_lineas ." ". fgets($file). "<br />"; // Muestra los datos de la base de datos
 
-		if($total_lineas==0)
+		if($total_lineas==-1)
 		{
 			echo "Salta<br/>";
 		} else {

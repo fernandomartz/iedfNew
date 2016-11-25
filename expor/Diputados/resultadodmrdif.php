@@ -1,162 +1,94 @@
 <?php
-error_reporting(E_ERROR);
-include("../conn/conn.php");
+//CONEXION BD
+include("../../../adodb/adodb.inc.php");
+$db = ADONewConnection("mysql");
+$db->debug = "true";
+$conectado = $db->Connect("localhost", "root", "123", "iedf");
+if(!$conectado) {
+	echo "<br/>No se conecto a la Base de Datos<br/>";
+ } else {
+ 	echo "<br/>Conectado a la Base de Datos<br/>";
+}
+$cantidad=999;
 
-$distrito = $_GET['distrito'];
-//$distrito = 'V';
+//Verifica que la Tabla este Vacia
+$rs0 = $db->execute("select count(*) from dmr2015diffp");
+$cantidad=$rs0->fields[0];
+echo "Registro existentes en la Tabla: ".$cantidad."<br/>";
 
-$sql2= "
-SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( prd ), SUM( pt ) , SUM( pvem ) , SUM( mc ) , SUM( na ) , SUM( cc1 ) , SUM( cc2 ) , SUM( nulos ) , SUM( votos ) , SUM( lista )
-FROM dmr2012
-WHERE distrito = '".$distrito."'
-GROUP BY seccion";
-
-?>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Estadistica por Fuerza Politica</title>
-    </head>
-<body>
-<?php
-	echo "<h2>Distrito: ". $distrito ."</h2>";
-
-$rs2 = $db->execute($sql2);
-while(!$rs2->EOF)
+if($cantidad < 1)
 {
-	echo "<h2>Seccion: ".  $rs2->fields[2] ."</h2>";
-$xdel = $rs2->fields[1];
-$xseccion = $rs2->fields[2];
+	//Recorrer el archivo linea por linea.
+	while(!feof($file))
+	{
+
+		$cadena = fgets($file);
+		//Dividir en un arreglo los valores de la fila
+		$arreglo = explode(",", $cadena);
+			//echo $total_lineas ." ". fgets($file). "<br />"; // Muestra los datos de la base de datos
+		if($total_lineas==-1)
+		{
+			echo "Salta<br/>";
+		} else {
+
+			$sql= "SELECT * FROM dmr2015 ORDER BY distrito, seccion, casilla";
+			$rs = $db->execute($sql);
+
+			while(!$rs->EOF)
+			{
+				$distrito = $rs->fields[1];
+				$del 	  =	$rs->fields[2];
+				$seccion  = $rs->fields[3];
+				$casilla  = $rs->fields[4];
+				$pan      = $rs->fields[5];
+				$pri	  = $rs->fields[6];
+				$prd	  = $rs->fields[7];
+				$pt		  = $rs->fields[8];
+				$pvem	  = $rs->fields[9];
+				$mc		  = $rs->fields[10];
+				$na		  = $rs->fields[11];
+				$cc1	  = $rs->fields[12];
+				$cc2	  = $rs->fields[13];
+				$nulos	  = $rs->fields[14];
+				$votos	  = $rs->fields[15];
+				$lista	  = $rs->fields[16];
 
 
-	//	$rs = $db->execute($sql);
-		$tabla = "<table border=1>";
-		$tabla .= "<tr>
-			<td>Distrito</td>
-			<td>Delegacion</td>
-			<td>Seccion</td>
-			<td>Casilla</td>
-			<td>PAN</td>
-			<td>PRI</td>
-			<td>PRD</td>
-			<td>PT</td>
-			<td>PVEM</td>
-			<td>MC</td>
-			<td>NA</td>
-			<td>CC1</td>
-			<td>CC2</td>
-			<td>V.Nulos</td>
-			<td>T.Votos</td>
-			<td>L.Nominal</td>
-			</tr>";
+				$sql3 = "insert into dmr2015diffp (distrito,del,seccion,casilla,pan,pri,pvem,na,cc1,cc2,nulos,votos,lista) ";
+				$sql3 .= "values ('".$distrito."'"; 	//distrito
+				$sql3 .= ",".$del;						//delegacion
+				$sql3 .= ",".$seccion;					//seccion
+				$sql3 .= ",'".$casilla."'";				//casilla
 
-		echo $tabla;
+				$sql3 .= ",".$pan;						//pan
+				$sql3 .= ",".$vpri;						//pri
+				$sql3 .= ",".$vpvem;					//pvem
+				$sql3 .= ",".$na;						//na
+				$sql3 .= ",".$sumcc1;					//cc1 - PRI - PVEM
+				$sql3 .= ",".$sumcc2;					//cc2 - PRD, PT, MC
 
-			$tabla3 = "<tr>
-			<td colspan='3'>Totales</td>
-			<td>".$rs2->fields[3]."</td>
-			<td>".$rs2->fields[4]."</td>
-			<td>".$rs2->fields[5]."</td>
-			<td>".$rs2->fields[6]."</td>
-			<td>".$rs2->fields[7]."</td>
-			<td>".$rs2->fields[8]."</td>
-			<td>".$rs2->fields[9]."</td>
-			<td>".$rs2->fields[10]."</td>
-			<td>".$rs2->fields[11]."</td>
-			<td>".$rs2->fields[12]."</td>
-			<td>".$rs2->fields[13]."</td>
-			<td>".$rs2->fields[14]."</td>
-			<td>".$rs2->fields[15]."</td>
-			</tr>";
-		echo $tabla3;
-		echo "</table>";
+				$sql3 .= ",".$nulos;					//nulos
+				$sql3 .= ",".$votos;					//votos
+				$sql3 .= ",".$lista.")";				//lista
 
-		// valores segun resultado
-		$rpan	=$rs2->fields[4];
-		$rpri	=$rs2->fields[5];
-		$rprd	=$rs2->fields[6];
-		$rpt	=$rs2->fields[7];
-		$rpvem	=$rs2->fields[8];
-		$rmc	=$rs2->fields[9];
-		$rna	=$rs2->fields[10];
-		$rcc1	=$rs2->fields[11];
-		$rcc2	=$rs2->fields[12];
-		$rVN = $rs2->fields[13];
-		$rTV = $rs2->fields[14];
-		$rLN = $rs2->fields[15];
+				//echo $sql3."<br/>";
 
-		unset($datos);
-
-		$datos[] = array('partido' => 'PAN', 'votos' => $rpan);
-		$datos[] = array('partido' => 'PRI', 'votos' => $rpri);
-		$datos[] = array('partido' => 'PRD', 'votos' => $rprd);
-		$datos[] = array('partido' => 'PT', 'votos' => $rpt);
-		$datos[] = array('partido' => 'PVEM', 'votos' => $rpvem);
-		$datos[] = array('partido' => 'MC', 'votos' => $rmc);
-		$datos[] = array('partido' => 'NA', 'votos' => $rna);
-		$datos[] = array('partido' => 'CC1', 'votos' => $rcc1);
-		$datos[] = array('partido' => 'CC2', 'votos' => $rcc2);
-
-
-		// Obtener una lista de columnas
-		foreach ($datos as $key => $row) {
-			$partidos[$key]  = $row['partido'];
-			$voto[$key] = $row['votos'];
-		}
-		array_multisort($voto, SORT_DESC, $partidos, SORT_ASC, $datos); // SORT_DESC - SORT_ASC
-		echo "<br/>Posición por numero total de votos en la seccion:<br/>";
-		echo "<table border=1>";
-		echo "<tr><td>Lugar</td><td>Partido</td><td>Votos</td><td>Dif#</td><td>Dif%</td><td>TV%</td></tr>";
-
-		$fin=9;
-		
-		for($i=0;$i<$fin;$i++) {
-
-			if($i <= 1) {
-				$difp = number_format((((($datos[0]['votos']-$datos[1]['votos']))/$rTV)*100),2,'.',',');
-				$difn = ($datos[0]['votos']-$datos[1]['votos']);
+				if ($db->Execute($sql3) === false) {
+					print 'error al insertar: '.$db->ErrorMsg().'<BR>';
 				}
-			else
-				{
-				$difp = number_format((((($datos[0]['votos']-$datos[$i]['votos']))/$rTV)*100),2,'.',',');
-				$difn = ($datos[0]['votos']-$datos[$i]['votos']);
-				}
-			$tvp = number_format((($datos[$i]['votos']/$rTV)*100),2,'.',',');
 
-			$xlugar = $i+1;
-			$xpartido = $datos[$i]['partido'];
-			$xvotos = $datos[$i]['votos'];
+				$rs->MoveNext();
+			}
+		} //if - Saltar
 
-			echo "<tr><td>".($i+1).".- </td><td>".$datos[$i]['partido']." </td><td> ".$datos[$i]['votos']." </td><td>". $difn ."</td><td>". $difp ."</td><td>". $tvp ."</td>";
+	// Contar el total de registros
+	$total_lineas++;
+	} //While
 
-		$sql3 = "insert into dmr2015dif (distrito,del,seccion,lugar,partido,votos,difn,difp,tvp) ";
-		$sql3 .= "values ('".$distrito."'"; 	//distrito
-		$sql3 .= ",".$xdel;						//delegacion
-		$sql3 .= ",".$xseccion;					//seccion
-		$sql3 .= ",".$xlugar;					//lugar
-		$sql3 .= ",'".$xpartido."'";			//partido
-		$sql3 .= ",".$xvotos;					//votos
-		$sql3 .= ",".$difn;						//difn
-		$sql3 .= ",".$difp;						//difp
-		$sql3 .= ",".$tvp.")";					//tvp
+fclose($file);
 
-		//echo $sql3."<br/>";
-/*
-		if ($db->Execute($sql3) === false) {
-			print 'error al insertar: '.$db->ErrorMsg().'<BR>';
-		}
-*/
+} //if
 
-		} //for
-		echo "</table><br/>";
-
-		
-			$rs2->MoveNext();
-		}
-
-
-
+$total_lineas = $total_lineas - 1;
+echo "Total de Registros: ". $total_lineas;
 ?>
-<br/>
-</body>
-</html>

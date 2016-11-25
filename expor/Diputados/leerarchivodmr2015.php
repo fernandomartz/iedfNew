@@ -4,7 +4,8 @@ include("../../../adodb/adodb.inc.php");
 $db = ADONewConnection("mysql");
 $db->debug = "true";
 $conectado = $db->Connect("localhost", "root", "123", "iedf");
-if(!$conectado) {echo "<br/>No se conecto a la Base de Datos<br/>";
+if(!$conectado) {
+	echo "<br/>No se conecto a la Base de Datos<br/>";
  } else {
  	echo "<br/>Conectado a la Base de Datos<br/>";
 }
@@ -17,19 +18,17 @@ echo "Registro existentes en la Tabla: ".$cantidad."<br/>";
 
 if($cantidad < 1)
 {
-
 	//Abrir archivo
 	$file = fopen("../../2015/Diputados/dmr2015.csv", "r") or exit("Unable to open file!");
 	$total_lineas=0;
 	//Recorrer el archivo linea por linea.
 	while(!feof($file))
 	{
-
 		$cadena = fgets($file);
 		//Dividir en un arreglo los valores de la fila
 		$arreglo = explode(",", $cadena);
 			//echo $total_lineas ." ". fgets($file). "<br />"; // Muestra los datos de la base de datos
-		if($total_lineas==0)
+		if($total_lineas==-1)
 		{
 			echo "Salta<br/>";
 		} else {
@@ -59,7 +58,6 @@ if($cantidad < 1)
 			$sql .= ",".$arreglo[18];		//nulos
 			$sql .= ",".$arreglo[19];		//votos
 			$sql .= ",".$arreglo[20].")";	//lista
-
 
 			//echo $total_lineas ." ". $arreglo[16]. "<br />";
 			//echo $sql. "<br />";
