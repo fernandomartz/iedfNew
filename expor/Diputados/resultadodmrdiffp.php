@@ -21,7 +21,7 @@ if(!$conectado) {
 
 $sql2= "
 SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( prd ) , SUM( pvem ) , SUM( pt ) , SUM( mc ) , SUM( na ) , SUM( morena ) , SUM( ph ) , SUM( es ) , SUM( cc1 ) , SUM( cc2 ) , SUM( cc3 ) , SUM( cc4 ) , SUM( nulos ) , SUM( votos ) , SUM( lista )
-FROM dmr2015 
+FROM dmr2015fp 
 GROUP BY seccion";
 //AND seccion = ".$seccion." WHERE distrito = '".$distrito."'
 ?>
@@ -227,7 +227,7 @@ while(!$rs2->EOF)
 
 			echo "<tr><td>".($i+1).".- </td><td>".$datos[$i]['partido']." </td><td> ".$datos[$i]['votos']." </td><td>". $difn ."</td><td>". $difp ."</td><td>". $tvp ."</td>";
 
-		$sql3 = "insert into dmr2015dif (distrito,del,seccion,lugar,partido,votos,difn,difp,tvp) ";
+		$sql3 = "insert into dmr2015diffp (distrito,del,seccion,lugar,partido,votos,difn,difp,tvp) ";
 		//$sql3 .= ",".$xdistrito;				//distrito
 		$sql3 .= "values ('".$distrito."'"; 	//distrito
 		$sql3 .= ",".$xdel;						//delegacion

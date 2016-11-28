@@ -1,9 +1,19 @@
 <?php
 error_reporting(E_ERROR);
-include("config/conn.php");
+//CONEXION BD
+include("../../../adodb/adodb.inc.php");
+$db = ADONewConnection("mysql");
+$db->debug = "true";
+$conectado = $db->Connect("localhost", "root", "123", "iedf");
+if(!$conectado) {
+	echo "<br/>No se conecto a la Base de Datos<br/>";
+ } else {
+ 	echo "<br/>Conectado a la Base de Datos<br/>";
+}
+//include("config/conn.php");
 
 $distrito = $_GET['distrito'];
-$distrito = 'V';
+//$distrito = 'V';
 //$seccion = $_GET['seccion'];
 
 //echo $distrito." ".$seccion."<br/>";
@@ -11,12 +21,11 @@ $distrito = 'V';
 
 
 $sql2= "
-SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( prd ) , SUM( pvem ) , SUM( pt ) , SUM( mc ) , SUM( na ) , SUM( morena ) , SUM( ph ) , SUM( es ) , SUM( cc1 ) , SUM( cc2 ) , SUM( cc3 ) , SUM( cc4 ) , SUM( nulos ) , SUM( votos ) , SUM( lista )
-FROM dmr2015fp
-WHERE distrito = '".$distrito."'
+SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( pvem ) , SUM( na ) , SUM( cc1 ) , SUM( cc2 ) , SUM( nulos ) , SUM( votos ) , SUM( lista )
+FROM dmr2012fp
 
 GROUP BY seccion";
-//AND seccion = ".$seccion."
+//AND seccion = ".$seccion."  WHERE distrito = '".$distrito."'
 ?>
 <html>
     <head>
@@ -51,37 +60,16 @@ $xseccion = $rs2->fields[2];
 			<td>Seccion</td>
 			<td>Casilla</td>";
 			if($vcc1 == 0) {
-				$tabla .="
-					<td>PAN</td>
+				$tabla .="<td>PAN</td>
 					<td>PRI</td>
-					<td>PRD</td>
 					<td>PVEM</td>
-					<td>PT</td>
-					<td>MC</td>
 					<td>NA</td>
-					<td>MORENA</td>
-					<td>PH</td>
-					<td>ES</td>
-					<td>CC1</td>
-					<td>CC2</td>
-					<td>CC3</td>
-					<td>CC4</td>";
+					<td>CC2 PRD-PT-MC</td>";
 			} else {
-				$tabla .="
-					<td>PAN</td>
-					<td>PRI</td>
-					<td>PRD</td>
-					<td>PVEM</td>
-					<td>PT</td>
-					<td>MC</td>
+				$tabla .="<td>PAN</td>
 					<td>NA</td>
-					<td>MORENA</td>
-					<td>PH</td>
-					<td>ES</td>
-					<td>CC1</td>
-					<td>CC2</td>
-					<td>CC3</td>
-					<td>CC4</td>>";
+					<td>CC1 PRI-PVEM</td>
+					<td>CC2 PRD-PT-MC</td>";
 			}
 		$tabla .= "<td>V.Nulos</td>
 			<td>T.Votos</td>
@@ -94,35 +82,20 @@ $xseccion = $rs2->fields[2];
 			<td colspan='3'>Totales</td>
 			<td>".$rs2->fields[3]."</td>";
 			if($vcc1 == 0) {
-			$tabla3 .= "
-			<td>".$rs2->fields[4]."</td>
+			$tabla3 .= "<td>".$rs2->fields[4]."</td>
 			<td>".$rs2->fields[5]."</td>
 			<td>".$rs2->fields[6]."</td>
 			<td>".$rs2->fields[7]."</td>
-			<td>".$rs2->fields[8]."</td>
-			<td>".$rs2->fields[9]."</td>
-			<td>".$rs2->fields[10]."</td>
-			<td>".$rs2->fields[11]."</td>
-			<td>".$rs2->fields[12]."</td>
-			<td>".$rs2->fields[13]."</td>
-			<td>".$rs2->fields[14]."</td>";
+			<td>".$rs2->fields[9]."</td>";
 			} else {
-			$tabla3 .= "
-			<td>".$rs2->fields[4]."</td>
-			<td>".$rs2->fields[5]."</td>
-			<td>".$rs2->fields[6]."</td>
+			$tabla3 .= "<td>".$rs2->fields[4]."</td>
 			<td>".$rs2->fields[7]."</td>
 			<td>".$rs2->fields[8]."</td>
-			<td>".$rs2->fields[9]."</td>
-			<td>".$rs2->fields[10]."</td>
+			<td>".$rs2->fields[9]."</td>";
+			}
+			$tabla3 .= "<td>".$rs2->fields[10]."</td>
 			<td>".$rs2->fields[11]."</td>
 			<td>".$rs2->fields[12]."</td>
-			<td>".$rs2->fields[13]."</td>
-			<td>".$rs2->fields[14]."</td>";
-			}
-			$tabla3 .= "<td>".$rs2->fields[15]."</td>
-			<td>".$rs2->fields[16]."</td>
-			<td>".$rs2->fields[17]."</td>
 			</tr>";
 		echo $tabla3;
 		echo "</table>";
@@ -130,21 +103,13 @@ $xseccion = $rs2->fields[2];
 		// valores segun resultado
 		$rpan	=$rs2->fields[4];
 		$rpri	=$rs2->fields[5];
-		$rprd   =$rs2->fields[6];
-		$rpvem	=$rs2->fields[7];
-		$rpt 	=$rs2->fields[8];
-		$rmc    =$rs2->fields[9];
+		$rpvem	=$rs2->fields[6];
 		$rna	=$rs2->fields[7];
-		$rmorena =$rs2->fields[8];
-		$rph    =$rs2->fields[9];
-		$res    =$rs2->fields[10];
-		$rcc1	=$rs2->fields[11];
-		$rcc2	=$rs2->fields[12];
-		$rcc3   =$rs2->fields[13];
-		$rcc4   =$rs2->fields[14];
-		$rVN = $rs2->fields[15];
-		$rTV = $rs2->fields[16];
-		$rLN = $rs2->fields[17];
+		$rcc1	=$rs2->fields[8];
+		$rcc2	=$rs2->fields[9];
+		$rVN = $rs2->fields[10];
+		$rTV = $rs2->fields[11];
+		$rLN = $rs2->fields[12];
 
 		unset($datos);
 
@@ -189,7 +154,7 @@ $xseccion = $rs2->fields[2];
 
 			echo "<tr><td>".($i+1).".- </td><td>".$datos[$i]['partido']." </td><td> ".$datos[$i]['votos']." </td><td>". $difn ."</td><td>". $difp ."</td><td>". $tvp ."</td>";
 
-		$sql3 = "insert into dmr2015diffp (distrito,del,seccion,lugar,partido,votos,difn,difp,tvp) ";
+		$sql3 = "insert into dmr2012diffp (distrito,del,seccion,lugar,partido,votos,difn,difp,tvp) ";
 		$sql3 .= "values ('".$distrito."'"; 	//distrito
 		$sql3 .= ",".$xdel;						//delegacion
 		$sql3 .= ",".$xseccion;					//seccion
@@ -205,7 +170,6 @@ $xseccion = $rs2->fields[2];
 		if ($db->Execute($sql3) === false) {
 			print 'error al insertar: '.$db->ErrorMsg().'<BR>';
 		}
-
 
 		} //for
 		echo "</table><br/>";
