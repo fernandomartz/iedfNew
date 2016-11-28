@@ -46,8 +46,8 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("datos").innerHTML=xmlhttp.responseText;
     }
   }
-  if(anio==2013){an=2013;}
-  else if(anio==2015){anio=2013; an=2015;}
+  if(anio==2015){an=2015;}
+  else if(anio==2015){anio=2015; an=2015;}
   else{an=anio;}
   
   if(datos==1)  { cadena= "datos"+anio+"CC"; } else { cadena= "datos"+anio+"PP"; }

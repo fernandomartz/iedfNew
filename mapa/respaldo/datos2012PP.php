@@ -19,24 +19,17 @@ if($tipo == 2) { $tipoEleccion = "jd"; }
 if($tipo == 3) { $tipoEleccion = "dmr"; }
 
 //echo $distrito." ".$seccion."<br/>";
-$ssql = "select anterior, modificado, nuevo from redistritacion where tipo=1 and seccion=".$seccion;
-$srs = $db->execute($ssql);
-
 $sql = "select * from ". $tipoEleccion ."2012 where distrito='".$distrito."' and seccion=".$seccion;
 $rs = $db->execute($sql);
 $del = $rs->fields[2];
 
-if($del==""){
-	$sql = "select * from ". $tipoEleccion ."2012 where distrito='".$distrito."'";
-	$rs = $db->execute($sql);
-	$distrito = $rs->fields[1];
-	$del = $rs->fields[2];
-}
 
 // valores segun resultado
 $del_name = array(0,1,"AZCAPOTZALCO","COYOACAN","CUAJIMALPA DE MORELO","GUSTAVO A. MADERO","IZTACALCO","IZTAPALAPA","LA MAGDALENA CONTRERAS","MILPA ALTA","ALVARO OBREGON","TLAHUAC","TLALPAN","XOCHIMILCO","BENITO JUAREZ","CUAUHTEMOC","MIGUEL HIDALGO","VENUSTIANO CARRANZA");
 $delx = $rs->fields[2];
 $delnom = $del_name[$delx]; 
+
+
 
 $sql2= "SELECT distrito, del, seccion, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( prd ) , SUM( pt ) , SUM( pvem ) , SUM( mc ) , SUM( na ) , SUM( cc1 ) , SUM( cc2 ) , SUM( nulos ) , SUM( votos ) , SUM( lista ) FROM ". $tipoEleccion ."2012 ";
 
@@ -44,32 +37,17 @@ $texto = "Posición por el número total de votos ";
 
 if($dato == null) { $dato=1;}
 if($dato==1) {
-	if($seccion!=""){
-		$sql2.= " WHERE distrito = '".$distrito."' AND seccion = ".$seccion." GROUP BY seccion";
-		$texto.="en la sección:";
-	}else{
-		$sql2.= " WHERE distrito = '".$distrito."' GROUP BY distrito";
-		$texto.="en el distrito:";
-	}	
-}
+	$sql2.= " WHERE distrito = '".$distrito."' AND seccion = ".$seccion." GROUP BY seccion";
+	$texto.="en la sección:";	
+	}
 if($dato==2) {
-	if($_GET['anio']==2015){
-		$sql2.= " WHERE seccion in(SELECT seccion FROM redistritacion WHERE modificado =  '".$distrito."') GROUP BY distrito";
-		$texto.="en el distrito:";
-	}else{
 	$sql2.= " WHERE distrito = '".$distrito."' GROUP BY distrito";
 	$texto.="en el distrito:";
 	}
-}
 if($dato==3) {
-	if($_GET['anio']==2015){
-		$sql2.= " WHERE seccion in(SELECT seccion FROM redistritacion WHERE modificado =  '".$distrito."') GROUP BY distrito";
-		$texto.="en el distrito:";
-	}else{
 	$sql2.= " WHERE del = '".$del."' GROUP BY del";
 	$texto.="en la delegación:";
 	}
-}
 if($dato==4) {
 	$sql2= "SELECT 1=1, 2=2, 3=3, COUNT( casilla ) , SUM( pan ) , SUM( pri ) , SUM( prd ) , SUM( pt ) , SUM( pvem ) , SUM( mc ) , SUM( na ) , SUM( cc1 ) , SUM( cc2 ) , SUM( nulos ) , SUM( votos ) , SUM( lista ) FROM ". $tipoEleccion ."2012 ";
 	$texto.="en el DF:";
@@ -137,33 +115,19 @@ array_multisort($voto, SORT_DESC, $partidos, SORT_ASC, $datos); // SORT_DESC - S
 <!-- DIV TITULO: Distrito, Seccion, Delegacion -->
 	<div>
 		<?php 
-			if($seccion!="")
-				echo "<h2>Sección: ".  $seccion . " - Distrito: ". $distrito ."</h2>"; 
-			else
-				echo "<h2>Distrito: ". $distrito ."</h2>";
-			 
+			echo "<h2>Sección: ".  $seccion . " - Distrito: ". $distrito ."</h2>"; 
 			echo "<b>Delegación: ".$delnom."</b><br/>";
 		?>
 	</div>
 
 <!-- DIV MENU DATOS -->
-	<?php if($srs->fields[0]!=""){?>
-	<center>
-	<table style="margin-top:5px; margin-bottom:5px;">
-    <tr align="center" style="font-weight:bold;"><td width="80px">2012</td><td width="100px">Modificado 2012</td><td width="80px">2015</td></tr>
-    <tr align="center"><td><?php echo $srs->fields[0];?></td><td><?php echo $srs->fields[1];?></td><td><?php echo $srs->fields[2];?></td></tr>
-    </table></center><?php }?><br />
-<?php if($seccion==""){?>
 	<div style="background-color:#FFF; border-style:solid; border-color:#000; border-width:1px;">
 	Datos:
-
-    <!--<a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,1,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">Sección</a> |
+    <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,1,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">Sección</a> |
+    <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,2,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">Distrito</a> |
     <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,3,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">Delegación</a> |
-    <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,4,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">DF</a> |-->
-
-    <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,2,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2013)">Distrito 2012</a> |    
-    <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,3,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2015)">Distrito 2015</a> |    
-    <a href="#" onClick="javascript:loadXMLDoc3('<?php echo $seccion; ?>','<?php echo $distrito; ?>',1,1,1,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2013)">CC</a>
+    <a href="#" onClick="javascript:loadXMLDoc2('<?php echo $seccion; ?>','<?php echo $distrito; ?>',2,4,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">DF</a> |
+    <a href="#" onClick="javascript:loadXMLDoc3('<?php echo $seccion; ?>','<?php echo $distrito; ?>',1,1,1,<?php echo aleatorio(); ?>,<?php echo $tipo; ?>, 2012)">CC</a>
 	</div>
 
 
@@ -203,9 +167,8 @@ echo "Votación Total: ".number_format($rTV,0)."<br/>";
 echo "Votos Nulos: ".number_format($rVN,0)." (".number_format((($rVN/$rTV)*100),2,'.',',')."%)<br/>";
 echo "Numero de Casillas: ".number_format($rs2->fields[3],0)."<br/>";;
 echo "Participación: ".number_format((($rTV/$rLN)*100),2,'.',',')."%";
-//echo "<br /><br /><br />".$sql."<br />".$sql2."<br />".$sql3;
-?>
 
+?>
 <br/>
 </div>
 <!--  VENTANA DE BOTONES SECUNDARIOS. (Ver datos del Ganador, Ir datos comparativos, Ver mapa transparente, etc)
@@ -213,7 +176,6 @@ echo "Participación: ".number_format((($rTV/$rLN)*100),2,'.',',')."%";
     1
     </div>
 -->
-<?php }?>
 </div>
 </body>
 </html>
